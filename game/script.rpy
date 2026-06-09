@@ -147,6 +147,7 @@ label cemetery_scene:
     # choices - try to patch things up / panic???
 
 #The "sex" scene
+# TODO: This label may be unnecessary 
 label sesbian_lex:
     "Scene - Eve has 'sex' with Vallerie"
     jump mem_hallucination_1
@@ -219,13 +220,17 @@ label infidelity_ending:
             menu:
                 "Lie":
                     "Eve fucks Kit while crying and making excuses about Valerie (Infidelity Ending)"
-        "Try to talk to her": #Re-routes you to Delusion dependin gon choices
+        "Try to talk to her": #Re-routes you to Delusion depending on choices
             "Eve tries to explain her and Valerie's issues"
             menu:
-                "Fuck Kit": # back to infidelity
+                # TODO: This option should only appear if you pick "Try to talk to her" (other routes that lead to delusion can't reroute to infidelity. I'm tired and my brain hurts gn)
+                "Fuck Kit": # back to infidelity 
                     ""
                 "Confide in her": # Delusion endning
                     "Kit says that Eve is in the wrong"
+
+
+label delusion_ending:
 
 
 label good_ending:
