@@ -602,6 +602,33 @@ screen load():
     use file_slots(_("Load"))
 
 
+## Achievements Screen ##########################
+screen achievements():
+
+    tag menu
+
+    use game_menu(_("Achievements")):
+
+        vbox:
+            spacing 15
+            xalign 0.5
+            yalign 0.1
+
+            text "Achievements" size 50
+
+            # Achievement 1
+            if achievement.has("first_achievement"):
+                text "🏆 First Achievement - You did something awesome."
+            else:
+                text "❓ First Achievement - Locked"
+
+            # Achievement 2
+            if achievement.has("secret"):
+                text "🏆 Secret - Shhhhhhh."
+            else:
+                text "❓ Secret - Locked"
+
+
 screen file_slots(title):
 
     default page_name_value = FilePageNameInputValue(pattern=_("Page {}"), auto=_("Automatic saves"), quick=_("Quick saves"))
@@ -691,6 +718,7 @@ screen file_slots(title):
                         textbutton _("Download Sync"):
                             action DownloadSync()
                             xalign 0.5
+
 
 
 style page_label is gui_label

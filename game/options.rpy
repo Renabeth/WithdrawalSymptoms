@@ -178,6 +178,10 @@ init python:
 
     ## Classify files as None to exclude them from the built distributions.
 
+    # Register achievements
+    achievement.register("first_achievement")
+    achievement.register("secret")
+
     build.classify('**~', None)
     build.classify('**.bak', None)
     build.classify('**/.**', None)

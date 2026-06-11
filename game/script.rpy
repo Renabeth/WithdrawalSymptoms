@@ -8,19 +8,16 @@ define v = Character("Valerie", color="#a881f7")
 define k = Character("Kit", color="#ff7033")
 define l = Character("Landlord")
 
-
+# TODO: Achievements Menu
 
 # The game starts here.
 # labels act as bookmarks or chapter titles that assign a name to a specific point in your game's script
 label start:
 
-    $ achievement.grant("test")
-    "I'm granting an achievement"
-    if achievement.has("test"):
-        "And it worked!"
-    else:
-        "But that didn't work."
-        $ achievement.clear_all()
+    $ achievement.grant("first_achievement")
+    "You unlocked an achievement!"
+    
+
 
     # Show a background. This uses a placeholder by default, but you can
     # add a file (named either "bg room.png" or "bg room.jpg") to the
@@ -114,17 +111,21 @@ label mem_hallucination_1:
     # "Landlord knocks on door"
     # Are you high? (choices - yes, no, do you really care)
     # eventually jump to mem hallucination 2
+    # TODO: Only jump to landlord scene if choices are stay in bed > drugs
+    jump landlord_knocks
 
 label mem_hallucination_2:
-    "Scene - memory hallucination 2"
+    "Scene - memory hallucination 2. Evelyn Remembers her and Valerie having an argument about their drug usage and Val being vindictive and pushing the blame on her"
     # Evelyn Remembers her and Valerie having an argument about their drug usage and Val being vindictive and pushing the blame on her
-    
+    jump cemetery_scene_1
 
 label mem_hallucination_3:
-    "Scene - memory hallucination 3"
+    "Scene - memory hallucination 3. Evelyn Remembers a doctors appointment where a doctor berates her and Valerie for their excessive drug usage"
+    jump cemetery_scene_2
+
 
 label mem_hallucination_4:
-    "Scene - memory hallucination 4"
+    "Scene - memory hallucination 4. Evelyn Remembers having sex with Valerie and making her take drugs until she overdoses"
 
 label sex_hallucination_1:
     "Scene - sex hallucination 1"
@@ -142,9 +143,85 @@ label sex_hallucination_2:
             jump bad_touch_ending
 
 
-label cemetery_scene:
+label landlord_knocks:
+    "Scene - Landlord knocks on the door"
+    l "are you high?"
+
+    # all choices here lead to the same outcome
+    menu:
+        "Yes":
+            ""
+        "No":
+            ""
+        "Do you really care?":
+            ""
+        
+    "some dialogue here"
+    jump mem_hallucination_2
+
+
+label cemetery_scene_1:
     "Scene - Eve and Hallucination Valerie make up and go to the cemetery"
     # choices - try to patch things up / panic???
+
+    menu:
+        "Try to patch things up":
+            "Eve and Hallucination Valerie make up and go to the cemetery. Valerie goads Eve into remembering"
+            jump mem_hallucination_3
+        "??? panic??":
+            "route not finished yet"
+
+label cemetery_scene_2:
+    "Scene - Choices for True ending/Suicide/Delusion ending. Happens after mem hallucination 3"
+
+    menu:
+        "Apologize to her":
+            # True ending path
+            menu:
+                "Look at her":
+                    ""
+                    menu:
+                        "See her.":
+                            "Eve notices Valerie isnt visually clear (hallucinations) is rotting (hallucination of body)"
+                            "Eve runs back to the apartment with Valerie's hallucination screaming at her"
+                            "Evelyn discovers Valerie is dead"
+                            menu:
+                                "KILL YOURSELF":
+                                    "suicide ending path"
+                                    jump suicide_ending
+                                "Vomit":
+                                    "Evelyn vomits again"
+                                    menu:
+                                        "KILL YOURSELF":
+                                            jump suicide_ending
+                                        "Persist.":
+                                            "Evelyn freezes in shock"
+                                            menu:
+                                                "KILL YOURSELF":
+                                                    jump suicide_ending
+                                                "Get high until you can't think":
+                                                    "Do drugs (jump mem_hallucination_4)"
+                                                    # TODO might write mem_hallucination_4 dialogue here to make things simpler
+                                                    menu:
+                                                        "KILL YOURSELF":
+                                                            jump suicide_ending
+                                                        "Get help":
+                                                            jump true_ending
+        "She's still wrong":
+            "Path to Delusion Ending"
+            jump delusion_ending
+
+
+
+                                  
+                               
+                                
+                    
+                    
+
+                        
+
+
 
 #The "sex" scene
 # TODO: This label may be unnecessary 
@@ -188,6 +265,7 @@ label post_music:
 
 
 label suicide_ending:
+    "Scene - Suicide Ending"
     
 
 label bad_touch_ending:
@@ -228,14 +306,20 @@ label infidelity_ending:
                     ""
                 "Confide in her": # Delusion endning
                     "Kit says that Eve is in the wrong"
+                    jump delusion_ending
 
 
 label delusion_ending:
-
+    "Evelyn never learns of Valerie's death and impersonates her / mentally becomes 'her'"
 
 label good_ending:
 
 label true_ending:
+    "Scene - True ending."
+    "Eve confides in Kit that Valerie is dead"
+    menu:
+        "Mourn.":
+            "Eve buries Valerie"
 
 
 # This ends the game.
