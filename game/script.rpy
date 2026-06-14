@@ -8,14 +8,34 @@ define v = Character("Valerie", color="#a881f7")
 define k = Character("Kit", color="#ff7033")
 define l = Character("Landlord")
 
-# TODO: Achievements Menu
+screen bedroom():
+    add "bg room"
+    modal True
+
+    imagebutton auto "bg room_bed_%s":
+        focus_mask True
+        hovered SetVariable("screen_tooltip", "My bed")
+        unhovered SetVariable("screen_tooltip","")
+        action Jump ("bed")
+
+
 
 # The game starts here.
 # labels act as bookmarks or chapter titles that assign a name to a specific point in your game's script
 label start:
 
+    scene bg room
+
+    label room:
+        call screen bedroom
+
+    label bed:
+        "That's my bed. What do you mean there's no where to sit?"
+        # jump room
+
+
     # Code for glitched/blocked out text
-    # "dialogue here {glitch=5R.0}{color=#bababa}{b}██████{/b}{/color}{/glitch}"
+    "dialogue here {glitch=5.0}{color=#bababa}{b}██████{/b}{/color}{/glitch}"
 
     $ achievement.grant("first_achievement")
     "You unlocked an achievement!"
@@ -55,6 +75,8 @@ label start:
 
         "Answer the door":
             jump answer_door
+
+
          
     
 label stay_in_bed:
