@@ -297,19 +297,19 @@ screen navigation():
 
         spacing gui.navigation_spacing
 
-        if main_menu:
+##        if main_menu:
 
-            textbutton _("Start") action Start()
+##            textbutton _("Start") action Start()
 
-        else:
+##            else:
 
-            textbutton _("History") action ShowMenu("history")
+        textbutton _("Log") action ShowMenu("history")
 
-            textbutton _("Save") action ShowMenu("save")
+        textbutton _("Save") action ShowMenu("save")
 
         textbutton _("Load") action ShowMenu("load")
 
-        textbutton _("Preferences") action ShowMenu("preferences")
+        textbutton _("Options") action ShowMenu("preferences")
 
         textbutton _("Achievements") action ShowMenu("achievements")
 
@@ -318,33 +318,25 @@ screen navigation():
 
             textbutton _("End Replay") action EndReplay(confirm=True)
 
-        elif not main_menu:
+##            elif not main_menu:
 
-            textbutton _("Main Menu") action MainMenu()
+        textbutton _("Main Menu") action MainMenu()
 
-        textbutton _("About") action ShowMenu("about")
+        ##textbutton _("About") action ShowMenu("about")
 
         if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
 
             ## Help isn't necessary or relevant to mobile devices.
-            textbutton _("Help") action ShowMenu("help")
+            ##textbutton _("Help") action ShowMenu("help")
 
-        if renpy.variant("pc"):
+            if renpy.variant("pc"):
 
-            ## The quit button is banned on iOS and unnecessary on Android and
-            ## Web.
-            textbutton _("Quit") action Quit(confirm=not main_menu)
+                ## The quit button is banned on iOS and unnecessary on Android and
+                ## Web.
+                textbutton _("Quit") action Quit(confirm=not main_menu)
 
 
-style navigation_button is gui_button
-style navigation_button_text is gui_button_text
 
-style navigation_button:
-    size_group "navigation"
-    properties gui.button_properties("navigation_button")
-
-style navigation_button_text:
-    properties gui.text_properties("navigation_button")
 
 
 ## Main Menu screen ############################################################
@@ -361,12 +353,103 @@ screen main_menu():
     add gui.main_menu_background
 
     ## This empty frame darkens the main menu.
-    frame:
-        style "main_menu_frame"
+    ##frame:
+    ##    style "main_menu_frame"
 
     ## The use statement includes another screen inside this one. The actual
     ## contents of the main menu are in the navigation screen.
-    use navigation
+    ##use navigation
+
+    fixed:
+        style_prefix "navigation"
+
+        xpos gui.navigation_xpos
+        yalign 0.5
+
+        spacing gui.navigation_spacing
+
+##        if main_menu:
+
+            ## DEFAULT TEXT START BUTTON
+            #textbutton _("Start") action Start()
+            ## NEW IMAGE START BUTTON
+        imagebutton auto "gui/menu_buttons/teststartbutton_%s.png" xpos 500 ypos 650 action Start()
+
+##            else:
+
+        textbutton _("History") action ShowMenu("history")
+
+        textbutton _("Save") action ShowMenu("save")
+
+        ## DEFAULT TEXT LOAD BUTTON
+        ##textbutton _("Load") action ShowMenu("load")
+        ## NEW IMAGE START BUTTON
+        imagebutton auto "gui/menu_buttons/testloadbutton_%s.png" xpos 850 ypos 550 action ShowMenu("load")
+
+        ## DEFAULT TEXT OPTIONS BUTTON
+        ##textbutton _("Preferences") action ShowMenu("preferences")
+        ## NEW IMAGE OPTIONS BUTTON
+        imagebutton auto "gui/menu_buttons/testoptionsbutton_%s.png" xpos 1200 ypos 300 action ShowMenu("preferences")
+
+        ## DEFAULT TEXT ACHIEVEMENTS BUTTON
+        ##textbutton _("Achievements") action ShowMenu("achievements")
+        ## NEW IMAGE ACHIEVEMENTS BUTTON
+        imagebutton auto "gui/menu_buttons/testachievebutton_%s.png" xpos 1100 ypos 600 action ShowMenu("achievements")
+
+        if _in_replay:
+
+            textbutton _("End Replay") action EndReplay(confirm=True)
+
+##            elif not main_menu:
+
+        textbutton _("Main Menu") action MainMenu()
+
+        ## DEFAULT TEXT CREDITS BUTTON
+        ##textbutton _("About") action ShowMenu("about")
+        ## NEW IMAGE CREDITS BUTTON
+        imagebutton auto "gui/menu_buttons/testcreditsbutton_%s.png" xpos 1500 ypos 500 action ShowMenu("about")
+
+        ##if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
+
+        ## Help isn't necessary or relevant to mobile devices.
+        ##textbutton _("Help") action ShowMenu("help")
+
+        if renpy.variant("pc"):
+
+            ## The quit button is banned on iOS and unnecessary on Android and
+            ## Web.
+
+            ## DEFAULT TEXT QUIT BUTTON
+            ##textbutton _("Quit") action Quit(confirm=not main_menu)
+            ## NEW IMAGE QUIT BUTTON
+            imagebutton auto "gui/menu_buttons/testquitbutton_%s.png" xpos 1500 ypos 750 action Quit(confirm=not main_menu)
+
+
+
+
+
+    ## NOT WORKING LOGO GIF #####################################################
+    ##
+    ##image deadgirllogo:
+    ##"silly1.png"
+    ##pause 1. #this part defines how long to wait before next frame
+    ##"silly2.png"
+    ##pause 1.
+    ## repeat
+    ##
+    ##image silly:
+    ##    #"images/silly1.png" xpos 100 ypos 100
+    ##    #pause 0.5
+    ##    #"images/silly2.png" xpos 100 ypos 100
+    ##    #pause 0.5
+    ##    #repeat
+    ##
+    ##add silly
+    #############################################################################
+
+
+    ## TEMP LOGO IMAGE ##########################################################
+    add "images/silly1.png" xpos 100 ypos 100
 
     if gui.show_name:
 
