@@ -8,15 +8,30 @@ define v = Character("Valerie", color="#a881f7")
 define k = Character("Kit", color="#ff7033")
 define l = Character("Landlord")
 
+image eve normal = im.Scale("images/eve normal.png", 300, 900) # only need to define these once
+image val normal = im.Scale("images/val normal.png", 300, 900)
+
+
+
+# clickable objects in bedroom background 
+default inspect_mode = False
+
 screen bedroom():
+
     add "bg room"
     modal True
 
-    imagebutton auto "bg room_bed_%s":
-        focus_mask True
-        hovered SetVariable("screen_tooltip", "My bed")
-        unhovered SetVariable("screen_tooltip","")
-        action Jump ("bed")
+    textbutton ("Inspect On" if inspect_mode else "Inspect Off"):
+        xpos 20
+        ypos 20
+        action ToggleVariable("inspect_mode")
+
+    if inspect_mode:
+        imagebutton auto "bg room_bed_%s":
+            focus_mask True
+            hovered SetVariable("screen_tooltip", "My bed")
+            unhovered SetVariable("screen_tooltip", "")
+            action Jump("bed")
 
 
 
@@ -53,7 +68,12 @@ label start:
     # directory.
     # music - loops | sound - plays once
 
-    show eileen happy at left
+   
+
+    show eve normal at left
+    show val normal at right
+    
+    # show val normal at right zoom 0.5
 
    
 
