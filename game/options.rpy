@@ -183,6 +183,7 @@ init python:
     # Register achievements
     achievement.register("first_achievement")
     achievement.register("secret")
+    achievement.register("oldhead")
 
     build.classify('**~', None)
     build.classify('**.bak', None)

@@ -22,7 +22,7 @@ screen bedroom_inspect():
     add "bg room"
 
     textbutton ("Inspect On" if inspect_mode else "Inspect Off"):
-        xpos 20
+        xpos 1700
         ypos 1000
         action ToggleVariable("inspect_mode")
 
@@ -52,6 +52,7 @@ label start:
     "dialogue here {glitch=5.0}{color=#bababa}{b}██████{/b}{/color}{/glitch}"
 
     $ achievement.grant("first_achievement")
+    $ renpy.notify("Achievement Unlocked: First Steps!")
     "You unlocked an achievement!"
 
 
@@ -85,6 +86,7 @@ label start:
     e "Not again..."
     e "What time even is it?"
 
+    hide screen bedroom_inspect #will need to hide inspect during choices, re-enable after
     #FIRST CHOICE
     menu:
         "Stay in bed":
@@ -95,7 +97,7 @@ label start:
             jump answer_door
 
 
-    hide screen bedroom_inspect
+    # hide screen bedroom_inspect
     return
 
 
@@ -142,18 +144,56 @@ label answer_door:
             "nothing"
         "Fuck":
             jump sesbian_lex
-        "Listen to some music": #Eve & Val get high as they listen to music. All music choices lead to the mem_hallucination 2.
+        "Listen to some music":
+
             menu:
-                "deaftunes - throughout the fern": #needs to be persistant 
+                "deaftunes - throughout the fern":
+                    $ persistent.heard_deaftunes = True
                     "yap about deaftunes"
-                    jump mem_hallucination_2
-                "The Reused - Drawing":
-                    "yap about the reused"
-                    jump mem_hallucination_2
-                "Samsara - In Vitro":
-                    "yap about samsara"
+
+                    if (persistent.heard_deaftunes
+                        and persistent.heard_reused
+                        and persistent.heard_samsara):
+                        $ achievement.grant("oldhead")
+                        $ renpy.notify("Achievement Unlocked: Oldhead")
+
                     jump mem_hallucination_2
 
+                "The Reused - Drawing":
+                    $ persistent.heard_reused = True
+                    "yap about the reused"
+
+                    if (persistent.heard_deaftunes
+                        and persistent.heard_reused
+                        and persistent.heard_samsara):
+                        $ achievement.grant("oldhead")
+                        $ renpy.notify("Achievement Unlocked: Oldhead")
+
+                    jump mem_hallucination_2
+
+                "Mindful Self Benevolence":
+                    $ persistent.heard_reused = True
+                    "yap about mindful self benevolence"
+
+                    if (persistent.heard_deaftunes
+                        and persistent.heard_reused
+                        and persistent.heard_samsara):
+                        $ achievement.grant("oldhead")
+                        $ renpy.notify("Achievement Unlocked: Oldhead")
+
+                    jump mem_hallucination_2
+
+                "Samsara - In Vitro":
+                    $ persistent.heard_samsara = True
+                    "yap about samsara"
+
+                    if (persistent.heard_deaftunes
+                        and persistent.heard_reused
+                        and persistent.heard_samsara):
+                        $ achievement.grant("oldhead")
+                        $ renpy.notify("Achievement Unlocked: Oldhead")
+
+                    jump mem_hallucination_2
     #end scene
     return
 

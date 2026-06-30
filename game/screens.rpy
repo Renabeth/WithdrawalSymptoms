@@ -711,6 +711,12 @@ screen achievements():
             else:
                 text "❓ Secret - Locked"
 
+            # Music Achievement
+            if achievement.has("oldhead"):
+                text "🏆 Wow you *really* like music"                
+            else:
+                text "❓ Locked"
+
 
 screen file_slots(title):
 
