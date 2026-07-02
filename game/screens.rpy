@@ -717,6 +717,44 @@ screen achievements():
             else:
                 text "❓ Locked"
 
+            # True Ending Achievement
+            if achievement.has("true_ending"):
+                text "🏆 Reach the true ending"
+            else:
+                text "❓ Reach the ??? ending"
+
+            # Good Ending Achievement
+            if achievement.has("good_ending"):
+                text "🏆 Reach the good ending"
+            else:
+                text "❓ Reach the ??? ending"
+
+            # Good Ending Achievement
+            if achievement.has("suicide_ending"):
+                text "🏆 Reach the suicide ending"
+            else:
+                text "❓ Reach the ??? ending"
+            
+            # Bad Touch Achievement
+            if achievement.has("bad_touch_ending"):
+                text "🏆 Reach the bad touch ending"                
+            else:
+                text "❓ Reach the ??? ending"
+
+            # Infidelity Achievement
+            if achievement.has("infedlity_ending"):
+                text "🏆 Reach the infidelity ending"
+            else:
+                text "❓ Reach the ??? ending"
+
+            # Delusion Achievement
+            if achievement.has("delusion_ending"):
+                text "🏆 Reach the delusion ending"
+            else:
+                text "❓ Reach the ??? ending"
+
+            
+
 
 screen file_slots(title):
 

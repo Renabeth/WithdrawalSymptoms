@@ -184,6 +184,12 @@ init python:
     achievement.register("first_achievement")
     achievement.register("secret")
     achievement.register("oldhead")
+    achievement.register("true_ending")
+    achievement.register("good_ending")
+    achievement.register("suicide_ending")
+    achievement.register("bad_touch_ending")
+    achievement.register("infidelity_ending")
+    achievement.register("delusion_ending")
 
     build.classify('**~', None)
     build.classify('**.bak', None)
