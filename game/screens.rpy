@@ -449,7 +449,7 @@ screen main_menu():
 
 
     ## TEMP LOGO IMAGE ##########################################################
-    add "images/silly1.png" xpos 100 ypos 100
+    add "images/title_screen_logo.png" xpos 100 ypos 100
 
     if gui.show_name:
 
