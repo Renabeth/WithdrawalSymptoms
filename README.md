@@ -1,6 +1,6 @@
 ## Withdrawal Symptoms
 
-A visual novel created for the [Toxic Yuri VN Jam 2 ](https://itch.io/jam/toxic-yuri-vn-jam-2) by Studio GKG
+A visual novel by Studio GKG created for the [Toxic Yuri VN Jam 2 ](https://itch.io/jam/toxic-yuri-vn-jam-2) 
 
 **Can you begin to mourn when you haven't realized what you've lost?**
 
@@ -9,4 +9,18 @@ A visual novel created for the [Toxic Yuri VN Jam 2 ](https://itch.io/jam/toxic-
 [itch.io game page](https://aubsickle.itch.io/withdrawl-symptoms?secret=2JY12G0qNjz5rtnOmMyZbrRlDw)
 
 ## Credits
-[update later]
+Studio GKG
+
+- Aubrey "Aubsickle" Morra
+
+- Skye "Ghost Fetus" Peterson
+
+- Serena "Renabetha" D'Avanzo
+
+Featuring Music by:
+
+- Joe "joe_con7" Connors
+
+Additional Voice Acting supplied by:
+
+- Beatrice "Rubea"
