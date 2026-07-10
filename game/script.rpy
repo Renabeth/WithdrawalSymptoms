@@ -107,6 +107,7 @@ Withdrawal Symptoms features themes of:
 • Toxic relationships
 • Hallucinations
 • Death and Grieving
+• Infidelity & SA
 • Suicide
 
 If you're ok with that we hope you enjoy the game :)
@@ -147,7 +148,7 @@ label start:
     #hide screen bedroom_inspect #will need to hide inspect during choices, re-enable after
     #FIRST CHOICE
     menu:
-        "Ughhh"
+        "Ughhh,,,"
         "Stay in bed":
             jump stay_in_bed
             
@@ -209,13 +210,13 @@ label stay_in_bed:
             e "Anything for you, your majesty."
             "I crawl out of our bed and walk over to the light switch."
             "I flick it on."
-            v "Aughhhh,,, too bright,,,, shut it offfff"
+            v "Aughhhh,,, too bright,,,, shut it offfff."
             "She hides her head under the blanket."
             e "Sorry, sorry."
             "Guess I gotta rummage through our shit in the dark."
             "I wander over to the one table in our room and grab a random pill bottle."
             "Good enough."
-            "I flop back into our bed and open the bottle, taking 2 pills myself and leaving the rest up to Val."
+            "I flop back into our bed and open the bottle, taking two pills myself and leaving the rest up to Val."
             v "Thank you baby."
             e "Shhhhh, just take your pillssss."
             "I lay there on the bed staring at the ceiling."
@@ -485,8 +486,8 @@ label mem_hallucination_1:
     "Painting me like I was pressuring her."
     eh "I'll take one with you if that makes you feel better."
     "She glanced away, clearly reluctant."
-    vh "Alright fine, but only if you take one with me."
-    "But she agreeRRd anyway."
+    vh "Alright fine, but only if you we do it together." #edited because repetitive originally
+    "But she agreed anyway."
     eh "Ready?"
     "She nodded her head."
     "We both downed the pill, she made sure to wash hers down with water."
@@ -674,7 +675,7 @@ label after_music:
 
 
 label after_music_alt:
-    scene bg room with fade
+    #scene bg room with fade
     "The voices fade as I finally start to feel normal again."
     "My eyes open to the sight of a familiar stained wet gross ceiling."
     "My skull is banging like a drum."
@@ -739,7 +740,7 @@ label cemetery_scene_1:
     v "No, so that I could talk to you."
     v "Sweetie, I care a lot about you and, I know it hurts sometimes and..."
     "She's going off on a rant again but.."
-    "this time I don't feel as pushed away by it"
+    "this time I don't feel as pushed away by it."
     v "I just, really want you to get better, I care about you and…"
     v "I don't want you to destroy your life or worse."
     v "I- I don't want you to overdose."
@@ -751,49 +752,228 @@ label cemetery_scene_1:
     #TODO: Come back here
 
 label cemetery_scene_2:
-    "Scene - Choices for True ending/Suicide/Delusion ending. Happens after mem hallucination 3"
-
-    menu:
-        "Apologize to her":
-            # True ending path
-            menu:
-                "Look at her":
-                    ""
-                    menu:
-                        "See her.":
-                            "Eve notices Valerie isnt visually clear (hallucinations) is rotting (hallucination of body)"
-                            "Eve runs back to the apartment with Valerie's hallucination screaming at her"
-                            "Evelyn discovers Valerie is dead"
-                            menu:
-                                "KILL YOURSELF":
-                                    "suicide ending path"
-                                    jump suicide_ending
-                                "Vomit":
-                                    "Evelyn vomits again"
-                                    menu:
-                                        "KILL YOURSELF":
-                                            jump suicide_ending
-                                        "Persist.":
-                                            "Evelyn freezes in shock"
-                                            menu:
-                                                "KILL YOURSELF":
-                                                    jump suicide_ending
-                                                "Get high until you can't think":
-                                                    "Do drugs (jump mem_hallucination_4)"
-                                                    # TODO might write mem_hallucination_4 dialogue here to make things simpler
-                                                    menu:
-                                                        "KILL YOURSELF":
-                                                            jump suicide_ending
-                                                        "Get help":
-                                                            jump true_ending
-        "She's still wrong":
-            "Path to Delusion Ending"
-            jump delusion_ending
+    #Eve arrives at the cemetery with Val's body
+    e "We're here. It's chilly again."
+    e "Figures. I'd pick a night where the weather decides to remind me of you."
+    e "Feels like just yesterday you were here mourning… her."
+    e "I'm so sorry that you have to join her."
+    e "I hope she treats you better up there than I could down here."
+    e "heheh..."
+    "I dragged her over by the only tree in the cemetery."
+    e "This seems like a nice palce, right? Nice and in the shade."
+    "I jammed the shovel into the ground and started digging."
+    "I dug and dug until the hole was deep enough."
+    e "I'm sorry I couldn't get a coffin for you, those are really expensive."
+    e "You deserve better."
+    e "I hope the bag keeps you safe at least."
+    "I push her into the hole."
+    "I wince as I hear her slam against the ground."
+    "Goodbye. Lover."
+    "I buried Val in that pit."
+    "Once I had filled it back up I rummaged around the cemetery for rocks to create a makeshift gravestone."
+    "I carved her name into one of the rocks."
+    "Finally, I put a flower I snagged onto her grave."
+    e "I'll miss you."
+    e "Forever."
+    jump true_ending
+    
 
 
 
 label try_to_remember:
-    "Scene - try hard to remember"
+    #"Scene - try hard to remember" (eve realizes val is dead)
+    #NOTE: This part got really long and nested but making it different labels wouldve been clunky so whatever
+    "I remembered it."
+    "She took me there, to the doctor."
+    "Because..."
+
+    menu:
+        "Apologize to her":
+            "She cared about me."
+            "She just, she just wanted me to get better."
+            "I start to cry."
+            "For once, I'm not overwhelmed by anger."
+            "I just let my feelings out."
+            "But once I was finished I heard her voice."
+            v "Do you remember?"
+            "I nod my head."
+            v "Baby, I'm just, so glad. Glad you know that I cared about you."
+            v "I cared about you so much."
+            menu:
+                v "Baby, look at me."
+                "Look at her":
+                    v "See how much I cared about you."
+                    "I look up at her."
+                    "But she's wrong."
+                    "She looks... wrong."
+                    "She isn't focused in my vision anymore."
+                    #TODO: Add lower opacity Val here
+                    #TODO: Use glitch text for val?
+                    "Even her voice is starting to sound off."
+                    "I feel my heartbeat start to well up in my chest."
+                    "It's pumping hard and I start panicking."
+                    v "{glitch=5.0}{color=#bababa}{b}babyyyyyyyyyyyyy, are you okay?...{/b}{/color}{/glitch}"
+                    "No, no no no no no"
+                    e "NO!"
+                    "I scream at full volume."
+                    "Everyone's staring at me. They're all staring."
+                    #TODO maybe take another transition from that video for this part
+                    "I sprint back home, back to my apartment, to our apartment."
+                    "The scenery speeds besides me as I stumble and run and trip all the way back home."
+                    "I slam against the door and frantically reach into my pockets trying to feel for my keys."
+                    "I finally find them and jam the key in the lock."
+                    "I run into the apartment."
+                    menu:
+                        "See her.":
+                            "Finally, I see her."
+                            "I didn't see her before..."
+                            "...but I see her now."
+                            "A wave of nausea hits me. I feel it well up in my throat."
+                            "I can't stop myself from vomiting into my hand at the sight of it."
+                            "I'm so dizzy."
+                            "I can't stand up straight." #hehe straight
+                            "I walk over to the bed and look down at it."
+                            e "Valerie."
+                            "I'm crying again."
+                            
+
+                            menu:
+                                "Her body is laying there."
+                                "KILL YOURSELF":
+                                    jump suicide_ending
+                                "KILL YOURSELF":
+                                    jump suicide_ending
+                                "KILL YOURSELF":
+                                    jump suicide_ending
+                                "KILL YOURSELF":
+                                    jump suicide_ending
+                                "vomit.":
+                                    "I throw up again, all over my hand and on her."
+                                    "I'm so nauseous I can't even think."
+                                    "My whole body is shaking violently."
+                                    "It feels like static."
+                                    menu:
+                                        "KILL YOURSELF":
+                                            jump suicide_ending
+                                        "KILL YOURSELF":
+                                            jump suicide_ending
+                                        "KILL YOURSELF":
+                                            jump suicide_ending
+                                        "persist.":
+                                            "I can't give up."
+                                            "She wouldn't want me to."
+                                            "She would want me to be strong."
+                                            "For her."
+                                            menu:
+                                                "KILL YOURSELF":
+                                                    jump suicide_ending
+                                                "KILL YOURSELF":
+                                                    jump suicide_ending
+                                                "Get high until you can't think.":
+                                                    "I can only be so strong."
+                                                    e "I'm sorry baby, I just, I can't deal with this."
+                                                    e "Please understand."
+                                                    "I grab whatever I can find on the floor and take it."
+                                                    "I don't care anymore, I just can't be sober right now."
+                                                    "I fall to the floor and let my mind get hazy."
+                                                    menu:
+                                                        "KILL YOURSELF":
+                                                            jump suicide_ending
+                                                        "Get help.":
+                                                            "I finally manage to get myself under control, I stumble my way out of our apartment."
+                                                            "My apartment."
+                                                            "I ran into Kit shortly after."
+                                                            "She took me back into her apartment, she could see how messed up I was."
+                                                            "I told her about Valerie, how she died and how I'd be hiding it."
+                                                            "I don't remember what I said exactly, that whole night is still a haze."
+                                                            "I'm glad i confided in her that night, I think it might've been what I needed to not do something rash."
+                                                            "I stayed over at Kit's for a couple nights."
+                                                            "I wasn't ready to go back to that apartment yet."
+                                                            "But one night, I finally built up the courage."
+                                                            "Out of everything, I remember that perfectly."
+                                                            menu:
+                                                                "Mourn.":
+                                                                    "I stand in front of the door to my apartment."
+                                                                    "I can feel myself shaking, I'm still not sure if I have the strength to face her."
+                                                                    "I made sure Kit didn't come with me. She doesn't need to see Val like this."
+                                                                    "She should remember her as she was."
+                                                                    "I take a deep breath and walk into the apartment."
+                                                                    "It's just how I left it."
+                                                                    "She's just how I left her."
+                                                                    e "H-hey baby, miss me? I'm sorry. For everything."
+                                                                    "I can already feel the tears welling up and running down my face."
+                                                                    "This has been trapped inside me for so long."
+                                                                    "I can't hold it in."
+                                                                    "I sat on the floor next to her sobbing for at least an hour."
+                                                                    "Eventually, I muster the strength to get up."
+                                                                    e "I'm, uh, I'm gonna give you a proper resting place."
+                                                                    e "You shouldn't be stuck in this shitty old apartment all the time."
+                                                                    e "My voice is still shaking, I've never felt emotions so overwhelming."
+                                                                    e "I know the perfect place."
+                                                                    e "I'm sure you remember it as fondly as I do."
+                                                                    "I go and rummage through our apartment, I find an old bag we used to move our mattress one time."
+                                                                    e "Should be big enough."
+                                                                    "I carefully place her inside it."
+                                                                    e "You look so peaceful."
+                                                                    "I zip up her bag and I drag her out of the aprtment."
+                                                                    e "Heheh, I brought a shovel for the occasion."
+                                                                    e "I hope you're proud of me, I even picked up a job to get the money for it."
+                                                                    "I'm still crying"
+                                                                    "Hey so, sorry if this hurts, we don't have any elevators so uhh... down the stairs we go."
+                                                                    "I dragged her all the way down the stairs and onto the sidewalk."
+                                                                    e "Y'know I bet I look hella suspicious doing this."
+                                                                    e "A crazy girl with a shovel and a body bag talking to herself while she walks."
+                                                                    e "I'm not talking to myself though, you're here."
+                                                                    e "Right, Val?"
+                                                                    "I keep dragging her down the sidewalk."
+                                                                    e "We're uh, we're getting close. I bet you can already tell where we're going, right?"
+                                                                    e "You were always perceptive like that."
+                                                                    e "Not me though, just look at how long it took for me to notice that you…"
+                                                                    e "I'll try to quit."
+                                                                    e "I know you would've wanted me to."
+                                                                    e "I can't promise I won't slip up, but I'll try."
+                                                                    jump cemetery_scene_2
+
+
+
+
+
+
+
+                                                        "KILL YOURSELF":
+                                                            jump suicide_ending
+                                                "KILL YOURSELF":
+                                                    jump suicide_ending
+                                                "KILL YOURSELF":
+                                                    jump suicide_ending
+
+                                                
+                                        "KILL YOURSELF":
+                                            jump suicide_ending
+                                        "KILL YOURSELF":
+                                            jump suicide_ending
+                                        "KILL YOURSELF":
+                                            jump suicide_ending
+                                    
+                                        
+                                "KILL YOURSELF":
+                                    jump suicide_ending
+                                "KILL YOURSELF":
+                                    jump suicide_ending
+                                "KILL YOURSELF":
+                                    jump suicide_ending
+                                "KILL YOURSELF":
+                                    jump suicide_ending
+
+
+
+
+
+
+
+        "She's still wrong":
+            "She thinks she's better than me." #TODO: PICK UP HERE
+
                                                                
                         
 
@@ -859,11 +1039,40 @@ label delusion_ending:
 label good_ending:
 
 label true_ending:
-    "Scene - True ending."
-    "Eve confides in Kit that Valerie is dead"
-    menu:
-        "Mourn.":
-            "Eve buries Valerie"
+    #"Scene - True ending."
+    #"Eve confides in Kit that Valerie is dead"
+    "After that I just, kept living my life."
+    "So much time passed, so much time without"
+    "her."
+    "Valerie."
+    "But today's been three years since she died."
+    "And here I am, back at the cemetery."
+    "I sit on the floor next to her."
+    e "Hey baby, I missed you."
+    e "Sorry I haven't visited in awhile. I just, got kinda busy."
+    e "I met this girl..."
+    e "I was out at a bar with Kit."
+    e "I know, still weird that we're friends."
+    e "I think you of all people know how much she drove me up the wall."
+    e "But, she's been there for me."
+    e "She made me hear about this stupid book the other day, you might've liked it."
+    e "Reminds me of those weird homoerotic anime scenes you would show me."
+    e "It was called like, Warmed Competitors, or something dumb like that."
+    e "Whatever that's off-topic."
+    e "So yeah, I met this girl, I think you would've liked her."
+    e "She listens to the same music you would, and she um"
+    e "she helped me from relapsing the other day."
+    e "Yeah..."
+    e "Maybe I'll bring her around here sometime."
+    e "I haven't told her about you yet, sorry."
+    e "I'm just a little worried, y'know?"
+    e "Cuz of how I was."
+    e "I just hope she's better at dealing with this kind of thing than me."
+    e "I still miss you."
+    e "Every day."
+    "It hasn't really gotten easier but I have people to support me through it."
+    e "I love you, Valerie."
+    jump credits
 
 
 transform credits_scroll:
