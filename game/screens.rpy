@@ -721,13 +721,13 @@ screen achievements():
             if achievement.has("true_ending"):
                 text "🪦 Reach the true ending"
             else:
-                text "❓ Reach the ??? ending"
+                text "❓ Reach the true ending"
 
             # Good Ending Achievement
             if achievement.has("good_ending"):
                 text "💉 Reach the good ending"
             else:
-                text "❓ Reach the ??? ending"
+                text "❓ Reach the good ending"
 
             # Good Ending Achievement
             if achievement.has("suicide_ending"):

@@ -5,6 +5,7 @@
 
 define e = Character("Evelyn",color="#b0d5f5")
 define v = Character("Valerie", color="#a881f7")
+define vq = Character("???", color="#a881f7")
 define k = Character("Kit", color="#ff7033")
 
 define eh = Character("Evelyn?",color="#b0d5f5")
@@ -46,6 +47,9 @@ default came_from_drugs = False
 default came_from_cemetery_1 = False
 default came_from_offer_kit_drugs = False
 default came_from_answer_phone = False
+default came_from_val_discovery = False
+default came_from_sesbian_lex = False
+
 
 
 
@@ -126,18 +130,63 @@ If you're ok with that we hope you enjoy the game :)
 # labels act as bookmarks or chapter titles that assign a name to a specific point in your game's script
 label start:
 
-
-
-    #Prologue will go here
     #scene bg cemetary
     call screen content_warning with fade
 
-    scene bg room with spiral_transition
+    #Prologue
+    "It's chilly."
+    "Figures. I pick the one night where the weather decides to be a pain in the ass."
+    "The fog and flickering streetlamps aren't doing this place any favors either. I can barely make out the tombstones."
+    "I don't even know why I came out here."
+    "Pretty sure no one buried here gives a rats ass about me."
+    "At least the fog will hide the smoke so I don't get kicked out."
+    "*flick* *flick*"
+    "God damn it."
+    "*flick*"
+    "Shit, lighter's busted."
+    "I do not have it in me right now to walk back home."
+    "I look back up and across the field of foggy graves i see a girl standing over a grave."
+    "Weirdly enough she isn't looking down and bawling her eyes out."
+    "Instead, she's looking at me."
+    "Now she's walking towards me."
+    "I didn't take anything that strong today, I swear."
+    "I don't need some freaky ghost shit happening right now either."
+    "She stops and looks at me, her eyes are bloodshot. Probably not from the same reason mine are."
+    vq "Need a light?"
+    e "Aren't you supposed to be like, mourning your mom or whatever?"
+    vq "My girlfriend, {glitch=5.0}{color=#bababa}{b}████{/b}{/color}{/glitch}."
+    vq "She would've told me to stop staring and help you out."
+    e "Well that's very kind of her, it's not often I get to smoke with a ghost."
+    "She stares at me for a second, then pulls out a tiny purple lighter and-"
+    vq "It's not often I find druggies wandering the cemetery to be this approachable."
+    e "You want some?"
+    vq "No thanks, I don't like the taste of nicotine."
+    e "I wouldn't be too worried about that, got something much tastier in these."
+    v "Name's Valerie by the way."
+    e "Cute name, if anyone hung out with me they'd probably call me Evelyn."
+    v "So Evelyn, how often do you aimlessly wander around cemeteries?"
+    e "Usually whenever I'm on the hunt for grieving widows to pick up."
+    "She winces a little, yeah probably a shitty line to pull on the chick visiting her dead girlfriend."
+    "Dumbass."
+    v "Well, for the record if you're trying to pick up chicks then the cemetery probably isn't your best bet."
+    e "And yet you're still talking to me."
+    "She pauses for a moment."
+    v "Hey so... you got a phone?"
+    "I watch her reach into her pocket and pull out a crumpled up receipt for flowers."
+    "She scribbles her number on it and hands it to me."
+    v "You seem cool, keep in contact."
+    e "That's concerning."
+    v "You were the one trying to pick up widows."
+    "She practically runs away before I can respond."
+    "Weird, I'll probably never see her again anyways so whatever."
+
+
+    scene bg room with fade
+    "About two years later."
     #show screen bedroom_inspect #Put this in scenes that you can inspect
 
     #"dialogue here {glitch=5.0}{color=#bababa}{b}████{/b}{/color}{/glitch}"
 
-    # Scene 1 - Game Starts Here 
 
     show eve normal at left
     
@@ -461,7 +510,7 @@ label answer_door_alt:
         "Offer kit drugs":
             jump offer_kit_drugs
         "They're all for me":
-            ""
+            jump take_drugs_alone
 
 
 label kit_at_door:
@@ -622,9 +671,48 @@ label answer_phone:
                     e "It was like..."
                     jump mem_hallucination_3
                 "It's none of her businness":
-                    "b"
+                    e "It's none of your business."
+                    e "I'm- I'm going back to the apartment."
+                    k "Wait!"
+
+                    "I storm back to the apartment and lay on my bed next to Val."
         "Flirt with Kit to get her off your back":
-            ""
+            e "Oh, y'know.."
+            e "Hey Kit?"
+            k "Yeah?"
+            e "Anyone every tell you that you are very pretty?"
+            k "Oh um, yeah sometimes,,"
+            e "Well, I think you are {i}very{/i} pretty."
+            "I crawl over to her and put my hand on her chin."
+            k "EVE!!"
+            e "Yeah?"
+            "She's blushing."
+            k "E-EVE w-what about valerie?!"
+            Eve "Shhhh, it's fine trust me, she's into it when I do this"
+            Kit "I-I- I dunno if I’m comfortable Eve,,"
+            Eve "Hey, heyy it's fine."
+            "I run my hand along her side, I watch her react to it."
+            "I lean in and kiss her."
+            "She doesn't pull away."
+            menu:
+                "Fuck Kit.":
+                    k "Eeeveee,, mnmmnmnn.."
+                    e "c'monn~"
+                    "I kiss her deep again."
+                    "I grab her hand, she doesn't fight back."
+                    "I put her hand under my top and on my chest."
+                    e "Do you like my little tits"
+                    "She's nodding her head and whimpering."
+                    "Wow, she's even more subby than me. It's so cute."
+                    k "Eve... a-are you sure?"
+                    e "Hmm?"
+                    k "Are you sure Valerie is okay with us..."
+                    menu:
+                        "Lie.":
+                            jump infidelity_ending
+
+
+
 
 
 label kit_comes_over:
@@ -643,9 +731,12 @@ label kit_comes_over:
         "I know Valerie better than her":
             "a"
 
+label rot_in_bed:
+    "rot in bed"
 
 label val_discovery:
     #Scene - Eve and Kit discover Val is dead
+    $ came_from_val_discovery = True
     e "Fine."
     "I stand up and walk with Kit back over to our apartment."
     "I feel uneasy about this but I can't place why."
@@ -687,6 +778,27 @@ label val_discovery:
     jump mem_hallucination_4
     #TODO: need a boolean to jump to aftermath and come back here 7/11
 
+label aftermath:
+    "As I come back down from everything I’m not in my apartment anymore."
+    "I'm outside on the balcony as the police are rummaging through my apartment."
+    "Valerie is gone."
+    "And I didn't even get to say goodbye."
+    "The next few weeks were a blur."
+    "I wasn’t arrested on the grounds of I wasn't mentally stable enough to have known what I was doing."
+    "I don't really think that was true but..."
+    "They put me in mandated therapy for it"
+    "Kit and her mom, who was our landlord, took me in."
+    "I'm sure they love having a 25 year old drug addict on their couch."
+    "Well, Kit's couch"
+    "Her mom doesn't stick around much except to make sure I haven't relapsed and killed her daughter."
+    "I still feel numb, like none of this is real."
+
+    menu:
+        "Heal.":
+            jump good_ending
+
+label take_drugs_alone:
+    "follows they're all for me choice"
 
 label mem_hallucination_1:
     #"Scene - memory hallucination 1"
@@ -715,6 +827,10 @@ label mem_hallucination_1:
     if came_from_drugs:
         $ came_from_drugs = True 
         jump kit_at_door
+
+    if came_from_sesbian_lex:
+        $ came_from_sesbian_lex = True
+        jump after_sex_high
     
     return
 
@@ -840,8 +956,52 @@ label mem_hallucination_3:
 
 
 label mem_hallucination_4:
-    "Scene - memory hallucination 4. Evelyn Remembers having sex with Valerie and making her take drugs until she overdoses."
-    #start here 7/11
+    #"Scene - memory hallucination 4. Evelyn Remembers having sex with Valerie and making her take drugs until she overdoses."
+    "I can finally remember it, my heart feels like it’s going to rip out of my chest, and I'm covered in vomit."
+    "And just like that I'm back there. in that moment. I'm laying down, and she's on top of me."
+    scene black with spiral_transition
+    # another scene trans here
+    vh "Baby, are you sure?"
+    eh "It'll be okay I promise."
+    vh "It's just, it's a lot more than we usually do..."
+    eh "C'mon we've been alright so far, haven't we?"
+    eh "A little more won't hurt. I'll do it with you okay, it'll be less scary that way."
+    "I don't even remember what we took that night, but it was excessive, way too excessive."
+    "I think she was bleeding from all the needles."
+    eh "Hey,, hey, hey,, Val g-get on top of me,, it feels good like thatttt,,"
+    vh "y-yeah okay, b-baby I don't feel good."
+    eh "It's fine it's finee, it's o-ok if you have to vomit on me it's kind of hot,,"
+    "I remember her on top of me, I wasn't exactly sober myself so it's all a bit of a haze."
+    "But I remember she was twitching, I could feel her hands shake as she held on to me."
+    "She was looking down at me, her face was all kinds of blue. I was jerking off looking up at her, but she just didn't look right."
+    vh "Baby I, I feel-"
+    vh "*blech*"
+    "She vomited all over me, I don't even think I stopped touching myself until she fell limp on top of me."
+    "Then I panicked."
+    eh "V-val, Valerie? A-are you okay??"
+    "I felt her convulsing on top of me."
+    "The amount of substances in me at the time definitely didn't help."
+    "I shoved her off of me."
+    eh "Fuck, fuck fuck,,fuck fuckfuck fuck fuck fuck {b}FUCK.{/b}"
+    "I stood up, threw the blanket over her body."
+    eh "Fuckfuckfuckfuck it's all my fault, it's all my fault."
+    eh "I fell to my knees after that."
+    eh "N-no nonono she's ok, y-yeah she's ok, she's just taking a nap."
+    eh "Y-yeah heh, heheheh, s-she’s okay s-she’s just um tired and sleeping t-that's okay."
+    eh "I-I think I'll just-"
+    eh "and then I passed out."
+    "I don't know if it was from the shock or all the drugs in my system but when I woke up..."
+    "Valerie was there like she always was."
+    "I spotted a body pillow on the bed that I hadn't noticed before."
+    "I just assumed she bought it. But I guess, it was just as she was."
+  
+    if came_from_val_discovery:
+        $ came_from_val_discovery = True
+        jump aftermath
+
+    return
+
+
 label sex_hallucination_1:
     "Scene - sex hallucination 1"
 
@@ -1258,16 +1418,49 @@ label try_to_remember:
 
 #The "sex" scene
 label sesbian_lex:
+    $ came_from_sesbian_lex = True
     # "Scene - Eve has 'sex' with Vallerie"
     #jump mem_hallucination_1
-    e "God, I wanna fuck." 
+    e "God, I wanna fuck."
+    v "Yeah?"
+    e "Yeah."
+    v "Okay, but you know the rules"
+    e "yes ma'am... no touching and do what you say." 
+    v "That's a good girl."
+    v "Now strip and lay on the bed."
+    "I already know the drill, i peel off each article of my clothing while she watches me."
+    "I lay down onto our gross messy bed, all our pillows and shit piled around me."
+    "I look up and meet her gaze, she's staring down at me with daggers in her eyes."
+    "It's so fucking hot."
+    v "You can start stroking now. Stroke your tiny little dick for me."
+    "Fuck, she's so attractive when she's like this."
+    "I can already feel my heart pounding out of my chest as I touch myself for her."
+    v "You're such a pathetic little whore, you'll do anything just to get off won't you?"
+    e "Mmnnmgmmhn, yeah..."
+    v "Good, then I want you to take a little something for me, okay?"
+    e "Okayyyyyy~~"
+    "I feel something in my hand, I don't even look at it before I put it in my mouth."
+    v "Yeah, get all fucked up for me, okay?"
+    e "mhmmm~~"
+    "It hits me faster than I expect, I start to feel more out of it as I keep jerking off to her."
+    "Go on. Keep stroking."
+    #TODO: scene not finished
 
+    jump mem_hallucination_1
+
+
+label after_sex_high:
+    #TODO: Not finished
 
         
 
 
 label suicide_ending:
     "Scene - Suicide Ending"
+
+    $ achievement.grant("suicide_ending")
+    $ renpy.notify("Achievement Unlocked: I'll be with you soon")
+    jump credits
     
 
 label bad_touch_ending:
@@ -1290,25 +1483,34 @@ label bad_touch_ending:
         "Touch her.":
             "Evelyn tries to touch Valerie while they are having sex and her hallucination disappears"
 
+    $ achievement.grant("bad_touch_ending")
+    $ renpy.notify("Achievement Unlocked: Crossed the line")
+    jump credits
+
     
 
 label infidelity_ending:
-    "Eve runs into Kit and is pent-up sexually"
-    menu:
-        "Fuck Kit": # locks into infedility
-            "Kit refuses and mentions Valerie"
-            menu:
-                "Lie":
-                    "Eve fucks Kit while crying and making excuses about Valerie (Infidelity Ending)"
-        "Try to talk to her": #Re-routes you to Delusion depending on choices
-            "Eve tries to explain her and Valerie's issues"
-            menu:
-                # TODO: This option should only appear if you pick "Try to talk to her" (other routes that lead to delusion can't reroute to infidelity. I'm tired and my brain hurts gn)
-                "Fuck Kit": # back to infidelity 
-                    ""
-                "Confide in her": # Delusion endning
-                    "Kit says that Eve is in the wrong"
-                    jump delusion_ending_kit
+    e "It's fine."
+    "I push her to the ground."
+    e "Take off your clothes."
+    "She pulls her overalls without even so much as a second thought"
+    e "Val said it's fine."
+    "I grab her hips."
+    e "Val is out of town."
+    "I pull off my own pants."
+    e "She doesn't need to know."
+    "I grab her dick."
+    e "Val thinks it's hot."
+    "I start crying."
+    e "Val is dead."
+    e "Val broke up with me."
+    e "Val loved her more than me."
+    e "Kit."
+    e "Put it in me. Now."
+    
+    $ achievement.grant("infidelity_ending")
+    $ renpy.notify("Achievement Unlocked: Not love")
+    jump credits
 
 
 label delusion_ending_kit:
@@ -1322,12 +1524,29 @@ label delusion_ending_kit:
     "Isn't that right?"
     menu:
         "Valerie.":
-            ""
+            jump credits
+    
+    $ achievement.grant("delusion_ending")
+    $ renpy.notify("Achievement Unlocked: As if nothing happened")
+    jump credits
 
 label delusion_ending_drugs:
+    ""
+
+    $ achievement.grant("delusion_ending")
+    $ renpy.notify("Achievement Unlocked: As if nothing happened")
+    jump credits
 
 
 label good_ending:
+    "But the therapy helps."
+    "And Kit has become someone I can rely on."
+    "So even if she's gone I hope Valerie watches over me as I try to heal."
+    "Even if that's selfish of me."
+
+    $ achievement.grant("good_ending")
+    $ renpy.notify("Achievement Unlocked: Heal.")
+    jump credits
 
 label true_ending:
     #"Scene - True ending."
@@ -1363,8 +1582,10 @@ label true_ending:
     e "Every day."
     "It hasn't really gotten easier but I have people to support me through it."
     e "I love you, Valerie."
-    jump credits
 
+    $ achievement.grant("true_ending")
+    $ renpy.notify("Achievement Unlocked: Valerie.")
+    jump credits
 
 transform credits_scroll:
     ypos 1.2                   
