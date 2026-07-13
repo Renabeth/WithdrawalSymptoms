@@ -23,6 +23,8 @@ image eve sobbing = im.Scale("images/eve sobbing.png", 500, 1100)
 image eve tear up = im.Scale("images/eve tear up.png", 500, 1100)
 image eve tired = im.Scale("images/eve tired.png", 500, 1100)
 image eve vomit = im.Scale("images/eve vomit.png", 500, 1100)
+image eve crying = im.Scale("images/eve crying.png", 500, 1100)
+
 
 image val normal = im.Scale("images/val normal.png", 500, 1100)
 image val normal 75 = im.Scale("images/val normal 75.png", 500, 1100)
@@ -155,6 +157,7 @@ label start:
     #Prologue
     scene bg cemetery with fade
     show eve normal at left
+    play music "audio/sfx_night_ambience.mp3"
     "It's chilly."
     "Figures. I pick the one night where the weather decides to be a pain in the ass."
     "The fog and flickering streetlamps aren't doing this place any favors either. I can barely make out the tombstones."
@@ -184,7 +187,7 @@ label start:
     show val normal at right
     e "Well that's very kind of her, it's not often I get to smoke with a ghost."
     "She stares at me for a second, then pulls out a tiny purple lighter and-"
-    vq "I don’t usually see many druggies in this cemetery, certainly none as approachable as you."
+    vq "I don't usually see many druggies in this cemetery, certainly none as approachable as you."
     e "Guess I'm special."
     e "You want some?"
     show val annoyed at right
@@ -214,7 +217,7 @@ label start:
     hide val happy
     show eve normal at left
     "Weird, I'll probably never see her again anyways so whatever."
-
+    stop music fadeout 1.0
 
     scene bg room with fade
     #show screen bedroom_inspect #Put this in scenes that you can inspect
@@ -257,10 +260,9 @@ label inspect_bed:
 label stay_in_bed:
     # Scene - Eve doesn't answer door talks with Val in bed
     #show screen bedroom_inspect
-
     play sound "audio/sfx_knocking.mp3" volume 0.8
     show eve normal at left
-    "Ughh,, I'm too hungover for this"
+    "Ughh,, I'm too hungover for this."
     "It'll probably stop."
     play sound "audio/sfx_knocking.mp3" volume 0.8
     "Eventually."
@@ -295,6 +297,7 @@ label stay_in_bed:
     menu:
         v "What do you wanna do?"
         "Drugs":
+            play music "audio/music_track_1.mp3"
             $ came_from_drugs = True
             show eve smirk at left
             show val smug at right
@@ -327,7 +330,7 @@ label stay_in_bed:
             "I open my eyes, but my vision is burry now."
             "I hear two voices, they slowly start to become clearer."
             #hide eve normal
-
+            stop music fadeout 1.0
             jump mem_hallucination_1 
         
         "Fuck":
@@ -344,7 +347,8 @@ label answer_door:
     "Alriiiight I'm coming!"
     play sound "audio/sfx_knocking.mp3" volume 1.0 #kit knocking
     "I struggle to sit up, hangover's a total bitch."
-    "i rest my hand on the bed, the mattress sags into the floor"
+    play music "audio/music_track_1.mp3" fadein 0.3
+    "I rest my hand on the bed, the mattress sags into the floor"
     "A sharp pain runs up my arm, wakes me right up."
     "I look down at my hand, a used needle is stuck right in the middle of my palm."
     "I rip it out, it's painful. Hope I don't catch something."
@@ -403,19 +407,23 @@ label answer_door:
     play sound "audio/sfx_stomach_growl.mp3" volume 0.5
     "My stomache growls, guess I'm not much better. Wish we had money for takeout."
     "Wish we had money at all."
+    stop music fadeout 1.0
 
 
 
     menu:
         v "Guess suicide's off the menu, you have any better plans for the day?"
         "Sit around and do nothing":
+            #TODO: Need to add scene
             "nothing"
-            $ came_from_music = False
+            #$ came_from_music = False
 
         "Fuck":
             jump sesbian_lex
         "Listen to some music":
             $ came_from_music = True
+            play music "audio/music_track_3.mp3"
+            show eve normal at left
             e "This silence is killing me, I'm gonna put on an album."
             "I start rummaging through the pile of garbage next to the CD player."
             v "Pick something that isn't total trash please."
@@ -426,7 +434,9 @@ label answer_door:
                     $ persistent.heard_deaftunes = True
                     "Here's a classic."
                     #show drawing-album-cover at truecenter
+                    show val happy at right
                     v "I thought you weren't gonna put on my CDs?"
+                    show eve smirk at left
                     e "Had a change of heart"
                     e "plus Vhulva is a great song."
                     v "It's an {b}AMAZING{/b} song."
@@ -450,16 +460,18 @@ label answer_door:
                         and persistent.heard_samsara):
                         $ achievement.grant("oldhead")
                         $ renpy.notify("Achievement Unlocked: Oldhead")
-
+                    stop music fadeout 1.0
                     jump mem_hallucination_2
 
                 "The Reused - Drawing":
                     $ persistent.heard_reused = True
                     "Oh yeah here we go"
                     show drawing-album-cover at truecenter
+                    show val smug at right
                     v "Y'know I actually kinda prefer their older stuff."
+                    show eve smirk at left
                     e "I mean don't get me wrong, I enjoy their self titled-"
-                    e "but this album is nonstop hits-"
+                    e "but this album is nonstop hits"
                     e "and definitely underrated."
                     v "I mean it's got some good tracks, but The Smell of Paint is so iconic."
                     v "No track here has this much staying power."
@@ -480,7 +492,7 @@ label answer_door:
                         and persistent.heard_samsara):
                         $ achievement.grant("oldhead")
                         $ renpy.notify("Achievement Unlocked: Oldhead")
-
+                    stop music fadeout 1.0
                     jump mem_hallucination_2
 
                 "Mindless Self Benevolence - or":
@@ -496,6 +508,7 @@ label answer_door:
                     show or-album-cover at truecenter
                     show val annoyed at right
                     v "Ugh. Really? This shitty band again?"
+                    show eve smirk at right
                     e "This shit fucks and you can't deny it."
                     e "I've heard you sing Medication around the apartment before."
                     v "Don't they literally say slurs in like half of their songs?"
@@ -515,7 +528,7 @@ label answer_door:
                     "My ears start to ring with familiar voices."
 
                     
-
+                    stop music fadeout 1.0
                     jump mem_hallucination_2
 
                 "Samsara - In Vitro":
@@ -529,16 +542,21 @@ label answer_door:
 
                     e "Here's something."
                     "I pick up the Samsara CD. Val loves this band."
+                    show val happy at right
                     v "I thought you weren't gonna put on my CDs?"
                     e "Had a change of heart."
+                    show val smirk at left
                     e "PLus their music is nostalgic to me."
                     v "You're so old. My mom would play this in the car when I was a kid."
                     e "Well clearly you have a young and hip mom."
                     v "Or you're just old."
                     e "We're practically the same age."
-                    v "Girl I was literally 14 when you graduated high school."
+                    v "I was literally 14 when you graduated high school."
+                    show eve annoyed at left
                     e "Ugh gross don't say that or else I'm picking another CD."
+                    show eve smirk at left
                     e "And besides, I didn't graduate high school."
+                    show val annoyed at right
                     v "And what an invigorating life you lead now."
                     e "I know, I'm amazing."
                     e "Now zip it and listen to your mommy's music taste."
@@ -551,7 +569,9 @@ label answer_door:
                     "My vision starts to blur and the walls are... wrong."
                     "I try blinking to clear my eyes but it only gets worse."
                     "My ears start to ring with familiar voices."
+                    stop music fadeout 1.0
                     jump mem_hallucination_2
+   
     #end scene
     return
 
@@ -560,23 +580,23 @@ label answer_door_alt:
     # Scene - If Eve intially doesn't answer the door
     
     # Potentially alternate paths to infidelity, good, and suicide endings
-
+    play music "audio/music_track_1.mp3" fadein 0.3
     e "Honestly that knocking is pissing me off."
     play sound "audio/sfx_knocking.mp3" volume 1.0 #kit knocking
     "Guess I'll go see what she wants now."
+    hide val annoyed
     "I stumble towards the door, the faint memory is still racking my brain."
     "I reach the door and shout through the crack."
-    "Oh good, the banging is back."
-    "Guess I'll go see what she wants now."
-    "I stumble towards the door, the faint memory is still racking my brain."
-    "I reach the door and shout through the crack."
+    show eve angry at left
     e "Kit we're kinda busy right now! Could you like, piss off."
+    show kit normal at right
     k "AWWWW but i brought over fruit!!!!!!!! ☆♡"
     k "C'MONNN EVEEE just let me innnnnn,, you'll LOVE these fruitss!!!**"
     e "If I come out there will you shut up."
     k "Mhm mhm sure yes totally~"
     "She's not gonna shut up either way."
     "But I don't want her to bother Val while she comes down."
+    show bg hallway with dissolve
     "I open the door and walk outside, closing it behind me."
     k "Oh WOW, your apartment looks kinda gross Eve..."
     k "How do you live like that?"
@@ -600,6 +620,7 @@ label answer_door_alt:
 
 label kit_at_door:
     #Scene - Kit at the door after the player decides to do drugs
+    play music "audio/music_track_3.mp3"
     scene black with fuzzy_transition
     scene bg room with fuzzy_transition
     show eve high at left
@@ -682,6 +703,7 @@ label kit_at_door:
             "I don't even wait for her response before putting an acid tab on my tongue and waiting for it to kick in."
             show eve high at left
             "When it does I feel the walls close in a little and the familiar voices start to come back into earshot."
+            stop music fadeout 0.3
             jump mem_hallucination_2
 
         "Listen to some music":
@@ -719,7 +741,7 @@ label kit_at_door:
                         and persistent.heard_samsara):
                         $ achievement.grant("oldhead")
                         $ renpy.notify("Achievement Unlocked: Oldhead")
-
+                    stop music fadeout 0.3
                     jump mem_hallucination_2
 
                 "The Reused - Drawing":
@@ -749,7 +771,7 @@ label kit_at_door:
                         and persistent.heard_samsara):
                         $ achievement.grant("oldhead")
                         $ renpy.notify("Achievement Unlocked: Oldhead")
-
+                    stop music fadeout 0.3
                     jump mem_hallucination_2
 
                 "Mindless Self Benevolence - or":
@@ -784,7 +806,7 @@ label kit_at_door:
                     "My ears start to ring with familiar voices."
 
                     
-
+                    stop music fadeout 0.3
                     jump mem_hallucination_2
 
                 "Samsara - In Vitro":
@@ -798,7 +820,7 @@ label kit_at_door:
 
                     e "Here's something."
                     "I pick up the Samsara CD. Val loves this band."
-                    v "I thought you weren’t gonna put on my CDs?"
+                    v "I thought you weren't gonna put on my CDs?"
                     e "Had a change of heart."
                     e "PLus their music is nostalgic to me."
                     v "You're so old. My mom would play this in the car when I was a kid."
@@ -820,14 +842,16 @@ label kit_at_door:
                     "My vision starts to blur and the walls are... wrong."
                     "I try blinking to clear my eyes but it only gets worse."
                     "My ears start to ring with familiar voices."
+                    stop music fadeout 0.3
                     jump mem_hallucination_2
             # listen to music 
-            jump after_music_alt
+            #jump after_music_alt
 
 label get_even_higher_cont:
     scene bg black with fuzzy_transition
     scene bg room with fuzzy_transition
     show eve normal at left
+    #play music "audio/music_track_3.mp3" fadein 0.3
     "I start to come back down."
     "I look over at Valerie, I'm full of anger thinking about that argument."
     e "Val."
@@ -841,6 +865,7 @@ label get_even_higher_cont:
         "Try to patch things up":
             jump cemetery_scene_1
         "Confront her on the argument":
+            #play music "audio/music_track_2"
             "Why do you always do that?"
             v "Do what?"
             e "You always bring her up whenever we fight."
@@ -855,6 +880,7 @@ label get_even_higher_cont:
                 "Fuck her til she knows I was right":
                     ""
                 "Get so high you leave this world":
+                    play music "audio/music_hallucination.mp3"
                     e "No."
                     v "Baby-"
                     "I ignore her."
@@ -883,22 +909,29 @@ label get_even_higher_cont:
 
 
 label offer_kit_drugs:
-    scene black
+    scene bg hallway
+    show eve smirk at left
+    show kit normal at right
+    #TODO: kits room background
     $ came_from_offer_kit_drugs = True
+    play music "audio/music_track_3.mp3"
     e "You wanna join me?"
     k "I dunnoooo, my mom does't really want me doing drugs."
     e "Aww c'mon, they're just like the plants you grow it's nothing unnatural."
     k "I meannn, I GUESS if it's plant based I can try."
     k "Should I come inside?"
+    show eve normal at left
     e "No. It's gross in there."
     k "Awwwwwwwwwww, c'mon let me clean it up just a LITTLE."
     e "Nope, off limits."
-    k "Okayyy FINE, my apartment then!! ^v^"
+    k "Okayyy FINE, my apartment then!!!!!"
     "She grabs my wrist tightly and drags me over to her apartment."
     "I break free for a second to lock my door."
+    show bg room kit with dissolve
     "The second we enter her apartment I'm blinded by bright colors and plants everywhere."
     "We sit down on her floor."
     k "SOOO what drugs are we doing!! hehe"
+    show eve annoyed at left
     e "You are {i}very{/i} enthusiastic."
     k "Well I'm all excited now!!!"
     e "Alright, alright."
@@ -906,8 +939,10 @@ label offer_kit_drugs:
     k "MUSHROOMS!!♡♡"
     e "Shhh, not so damn loud, jesus."
     k "Oh! Right,, we gotta be... secretive..."
+    show eve angry at left
     e "No you dipshit you're just gonna make me deaf."
     "Kit and I each take some."
+    show eve high at left
     "Me a lot more than her."
     k "Welp, down the hatch! ⋆°✩"
     "We lay back and relax, I let my eyes rest as everything feels nice."
@@ -917,17 +952,24 @@ label offer_kit_drugs:
 
 label answer_phone:
     scene black with fuzzy_transition
+    scene bg room kit with fuzzy_transition
     #"Scene - Eve answers Val's phone"
     "I feel myself returning to reality."
     "I look over at Kit who's also starting to come down."
     "The argument is still ringing through my head."
     "She was such a bitch that night. Wouldn't leave me the hell alone."
+    play music "audio/music_track_1.mp3"
+    show kit normal at right
+    show eve normal at left
     k "EVE! That felt so good OMG. Do you have any more??"
-    e "Yeah, it feels good, and no."
+    show eve high at left
+    e "Yeah, it feels good, and no, I don't."
+    show eve normal at left
     "I probably do have more at the apartment but I'm not telling her that."
     "Suddenly I feel a persistent buzz in my pocket."
     "I reach in there and pull out a phone."
     "It's not mine though, it's Valerie's. I must've accidentally taken it this morning."
+    show eve annoyed at left
     "Shit, she's getting a call."
     "It's one of her friends, I shouldn't answer."
     "I'll just text back for her."
@@ -947,6 +989,7 @@ label answer_phone:
             k "Is she avoiding me? I haven't even seen her at her job."
             e "She's fine, she just quit her job is all."
             k "OH? Why?"
+            show eve normal at left
             e "They weren't paying her enough, had to uh look elsewhere."
             k "Where's she working now?"
             e "She's still looking okay."
@@ -964,6 +1007,7 @@ label answer_phone:
                     e "Fights. Old fights we've had."
                     k "Oh."
                     "She looks like she's regretting being so excited now that it's serious."
+                    show eve crying at left
                     e "Val has always been so damn critical of me, always criticizing the way I live my life."
                     e "Comparing me to her ex-girlfriend, like she loves her more than me."
                     k "Oh Eve, that's terrible."
@@ -974,7 +1018,7 @@ label answer_phone:
                     jump mem_hallucination_3
                 
 
-                    "I storm back to the apartment and lay on my bed next to Val."
+                    #"I storm back to the apartment and lay on my bed next to Val." #TODO: idk why this is here
         "Flirt with Kit to get her off your back":
             e "Oh, y'know.."
             e "Hey Kit?"
@@ -995,6 +1039,7 @@ label answer_phone:
             "She doesn't pull away."
             menu:
                 "Fuck Kit.":
+                    play music "audio/music_track_2.mp3"
                     k "Eeeveee,, mnmmnmnn.."
                     e "c'monn~"
                     "I kiss her deep again."
@@ -1017,6 +1062,8 @@ label answer_phone:
 label kit_comes_over:
     #"Scene - kit comes over to eves apartment"
     scene black with fuzzy_transition
+    scene bg room kit with fuzzy_transition
+    play music "audio/music_track_3.mp3"
     e "And... yeah..."
     k "Eve... I think she was just worried about you."
     e "N-no she.. she just wants to make me like her stupid ex."
@@ -1039,9 +1086,11 @@ label kit_comes_over:
 
 
 label val_discovery:
+   
     #Scene - Eve and Kit discover Val is dead
     scene bg room
     $ came_from_val_discovery = True
+    play music "audio/music_track_1.mp3"
     e "Fine."
     "I stand up and walk with Kit back over to our apartment."
     "I feel uneasy about this but I can't place why."
@@ -1055,6 +1104,7 @@ label val_discovery:
     k "OH!! Eve! I think she's sleeping!"
     e "What?"
     e "No she's right here."
+    stop music fadeout 0.3
     "Just as I finish my thought I look up at Kit-"
     "and she's vomitting."
     k "Oh my god..."
@@ -1066,6 +1116,7 @@ label val_discovery:
     "She isn't focused in my vision anymore." 
     show val normal 25 at right with fuzzy_transition
     "Even her voice is starting to sound off."
+    play music "audio/music_track_hallucination.mp3"
     "I feel my heartbeat start to well up in my chest."
     "It's pumping hard and I start panicking."
     v "{glitch=5.0}{color=#bababa}{b}babyyyyyyyyyyyyy, are you okay?{/b}{/color}{/glitch}"
@@ -1085,12 +1136,13 @@ label val_discovery:
     jump mem_hallucination_4
 
 label aftermath:
-    "As I come back down from everything I’m not in my apartment anymore."
+    play music "audio/music_track_title"
+    "As I come back down from everything I'm not in my apartment anymore."
     "I'm outside on the balcony as the police are rummaging through my apartment."
     "Valerie is gone."
     "And I didn't even get to say goodbye."
     "The next few weeks were a blur."
-    "I wasn’t arrested on the grounds of I wasn't mentally stable enough to have known what I was doing."
+    "I wasn't arrested on the grounds of I wasn't mentally stable enough to have known what I was doing."
     "I don't really think that was true but..."
     "They put me in mandated therapy for it"
     "Kit and her mom, who was our landlord, took me in."
@@ -1103,12 +1155,13 @@ label aftermath:
         "Heal.":
             jump good_ending
 
-label take_drugs_alone:
+label take_drugs_alone: #TODO: scene not finished
     "follows they're all for me choice"
 
 label mem_hallucination_1:
     #"Scene - memory hallucination 1"
     #NOTE: Note to self, do this if a new scene is using the same background as the previous screen, otherwise transition graphic wont display properly
+    play music "audio/music_hallucination.mp3"
     scene black with spiral_transition
     scene bg room with spiral_transition
     show eve normal at left
@@ -1133,7 +1186,7 @@ label mem_hallucination_1:
     show val normal at right
     vh "I guess that wasn't so bad."
     eh "See? What did I tell you?"
-
+    stop music fadeout 1.0
 
     if came_from_drugs:
         $ came_from_drugs = True 
@@ -1147,6 +1200,7 @@ label mem_hallucination_1:
 
 
 label mem_hallucination_2:
+    play music "audio/music_hallucination.mp3"
     scene black with spiral_transition
     scene bg room with spiral_transition
     show val angry at right
@@ -1168,7 +1222,7 @@ label mem_hallucination_2:
     eh "..."
     show eve annoyed at left
     eh "Whatever, I'm gonna get high."
-    show val annoyed at right
+    show val angry at right
     vh "No. No the fuck you aren't."
     vh "We have somewhere to be jackass."
     vh "You can't just spend all your time getting high, dressing like a slob and getting nothing done."
@@ -1182,7 +1236,7 @@ label mem_hallucination_2:
     show eve normal at left
     eh "Shit- I didn't mean that- I'm sorry-"
     vh "Well at least {glitch=5.0}{color=#bababa}{b}████{/b}{/color}{/glitch} acted like she loved me instead of just saying it."
-
+    stop music fadeout 1.0
     if came_from_music:
         $ came_from_music = True 
         jump after_music
@@ -1206,35 +1260,46 @@ label mem_hallucination_2:
     #jump cemetery_scene_1
 
 label mem_hallucination_3:
+    play music "audio/music_hallucination.mp3"
     #"Scene - memory hallucination 3. Evelyn Remembers a doctors appointment where a doctor berates her and Valerie for their excessive drug usage"
     scene black with spiral_transition
     scene bg doctor with spiral_transition
     "Doctor?" "Mixing substances, not sleeping, not eating regularly. These are very dangerous patterns of behavior. this isn't something I can just ignore."
-    eh "I can ignore it fine enough"
+    show eve normal at left
+    eh "I can ignore it fine enough."
     "Doctor?" "This hasn't gotten any better since your last physical, Evelyn. I'm worried about you doing this to yourself."
     eh "You aren't really worried, you're just paid to tell me that bull."
     "Doctor?" "I can't imagine you aren't a little worried, you came here for your appointment after all."
     eh "No, she made me come here."
+    show val normal at right
     vh "Baby, I'm worried about you."
+    show eve angry at left
     eh "Don't pretend like I'm the only one getting fucked up every night."
+    show val angry at right
     vh "Okay, yeah. I'm not innocent. But at least I'm trying to get us some help."
+    show val annoyed at right
     vh "Evelyn, you're destroying your life, our life."
     "I shoot daggers at her. I can't hide how annoyed I am she's airing our shit out."
+    show val normal at right
     vh "I want us to have a real life, I hate seeing you laying in bed all day."
     vh "I'm still trying, I still go to work, I have friends outside. I'm still doing things."
     eh "Yeah, doesn't stop you from using all that job money to pay for us to get high when you come home."
+    show val depressed at right
     vh "That's not fair."
     eh "You think having a job makes you better?"
     vh "I never said I was better, but I can't even get you to leave the house most of the time."
     eh "You buy us food and spend the rest on the shit we use to get high."
+    show val angry at right
     vh "You woudn't eat if I didn't buy us food, you'd starve to death drugged out on the floor."
     eh "Always trying to pretend like you don't want to be high right next to me."
     eh "{i}\"We could stop at any time\"{/i} right?"
+    show val normal at right
     vh "If you would just try, maybe we could."
     vh "Don't make me complacent in you falling apart, dumbass."
     "I can hear that hack doctor talking, I barely process any words they're saying."
     "Doctor?" "Evelyn, what concerns me most is that this pattern can become fatal."
     eh "Whatever. It's my life not yours, just leave it alone."
+    show val depressed at right
     vh "Sweetie, please."
     vh "I don't want to lose you too."
     "I stood up to leave."
@@ -1246,9 +1311,11 @@ label mem_hallucination_3:
     eh "I'm not taking any more of this shit."
     vh "Evelyn please, I can't just sit by and watch you kill yourself like this."
     eh "You don't get to decide that for me."
+    show eve normal at left
     eh "So what if I OD? You already lost one girlfriend. You can handle it again."
     eh "I'm just the imperfect girlfriend, right?"
     eh "Nothing like her."
+    show val crying at right
     "Val looks like she's on the brink of tears."
     vh "Don't talk about her like that."
     "I can't stand it when she looks at me like that. Like I hurt her. Like it's my fault."
@@ -1258,7 +1325,7 @@ label mem_hallucination_3:
     vh "*sniff* You think I could go through at again?"
     eh "I think you'd survive, yeah."
     vh "That's not the same thing and you know it."
-
+    stop music fadeout 1.0
 
     if came_from_cant_feel_anymore:
         $ came_from_cant_feel_anymore = True
@@ -1268,7 +1335,7 @@ label mem_hallucination_3:
         $ came_from_cemetery_1 = True
         jump try_to_remember
 
-    if came_from_cemetery_1:
+    if came_from_cemetery_1_alt:
         $ came_from_cemetery_1 = True
         jump try_to_remember
 
@@ -1281,8 +1348,9 @@ label mem_hallucination_3:
 
 
 label mem_hallucination_4:
+    play music "audio/music_hallucination.mp3"
     #"Scene - memory hallucination 4. Evelyn Remembers having sex with Valerie and making her take drugs until she overdoses."
-    "I can finally remember it, my heart feels like it’s going to rip out of my chest, and I'm covered in vomit."
+    "I can finally remember it, my heart feels like it's going to rip out of my chest, and I'm covered in vomit."
     "And just like that I'm back there. in that moment. I'm laying down, and she's on top of me."
     scene black with spiral_transition
     scene doctor with spiral_transition
@@ -1313,40 +1381,28 @@ label mem_hallucination_4:
     eh "Fuckfuckfuckfuck it's all my fault, it's all my fault."
     eh "I fell to my knees after that."
     eh "N-no nonono she's ok, y-yeah she's ok, she's just taking a nap."
-    eh "Y-yeah heh, heheheh, s-she’s okay s-she’s just um tired and sleeping t-that's okay."
+    eh "Y-yeah heh, heheheh, s-she's okay s-she's just um tired and sleeping t-that's okay."
     eh "I-I think I'll just-"
     eh "and then I passed out."
     "I don't know if it was from the shock or all the drugs in my system but when I woke up..."
     "Valerie was there like she always was."
     "I spotted a body pillow on the bed that I hadn't noticed before."
     "I just assumed she bought it. But I guess, it was just as she was."
-  
+    stop music fadeout 1.0
     if came_from_val_discovery:
         $ came_from_val_discovery = True
         jump aftermath
 
+
+
+
     return
-
-
-label sex_hallucination_1:
-    "Scene - sex hallucination 1"
-
-label sex_hallucination_2:
-    "Scene - sex hallucination 2"
-    # Eve takes drugs while jerking off the Valerie, causes hallucinations to get worse/more violent/aggresive
-
-    menu:
-        "I can't deal with this right now": # Leads to infidelity ending
-            ""
-            jump infidelity_ending
-        "I don't want to stop. I want to touch her.": # Leads to bad touch ending
-            ""
-            jump bad_touch_ending
 
 
 label after_music:
     scene bg room with fuzzy_transition
     # "Scene - Eve starts crying listening to music after hallucination 2"
+    play music "audio/music_track_2.mp3" fadein 0.3
     "The voices fade as I finally start to feel normal again."
     "My eyes open to the sight of a familiar stained wet gross ceiling."
     "My skull is banging like a drum."
@@ -1364,7 +1420,7 @@ label after_music:
         "Try to talk to your girlfriend":
             #Leads to mem hallucination 4 and good ending
             "Eve tries to talk it out with Val but she starts subconciously blocking out what Valerie says until running out in a panic where she runs into kit bringing over some fruits"
-        "Fuck the feelings away":
+        "Fuck the feelings away": #TODO scene not finished
             jump sex_hallucination_2
             ""
         "Get so fucked up you don't feel anymore":
@@ -1388,6 +1444,7 @@ label after_music:
 label after_music_alt:
     scene black with fuzzy_transition
     scene bg room with fuzzy_transition
+    play music "audio/music_track_3.mp3" fadein 0.3
     "The voices fade as I finally start to feel normal again."
     "My eyes open to the sight of a familiar stained wet gross ceiling."
     "My skull is banging like a drum."
@@ -1443,7 +1500,7 @@ label after_music_alt:
 
 
 
-label after_hallucination_panic:
+label after_hallucination_panic: #TODO not finished
     scene bg room with fuzzy_transition
     "Scene after mem hal 3"
 
@@ -1455,6 +1512,7 @@ label cemetery_scene_1:
     scene bg room
     show eve normal at left
     show val normal at right
+    play music "audio/music_track_1.mp3" fadein 0.3
     e "Agh, I'm sorry, I just, I keep remembering shit."
     e "Stupid fucking arguments we've had."
     e "I just- I hate when I get like that. I just, I hate it so much when you talk about her."
@@ -1495,6 +1553,7 @@ label cemetery_scene_1:
     v "Sorry *sniffle* about that."
     "And she wipes her tears off her face."
     v "Let's uh, go stand under the tree, okay?"
+    show bg tree with dissolve
     "We go and walk over to the lone tree among the graves, we sit down underneath it."
     v "Do you know why we came here?"
     e "So you could talk about your dead ex-girlfriend?"
@@ -1515,6 +1574,7 @@ label cemetery_scene_1_alt:
     #Hear her out and go to the cemetery
     #TODO background and sprites
     $ came_from_cemetery_1_alt = True
+    play music "audio/music_track_1.mp3" fadein 0.3
     e "Yeah, okay... where?"
     v "We're going to visit her."
     e "What? Why?"
@@ -1523,11 +1583,13 @@ label cemetery_scene_1_alt:
     e "I-I guess."
     e "Sure."
     "I take one more look at Val and walk towards the door."
+    show bg outside cem day with fade
     "I have fond memories of the cemetery, even if {i}she{/i} is buried there"
     "I walk with Val to the cemetery, it's always weird walking around in the daylight."
     "We always get shifty looks from everyone."
     "I guess probably because I look like shit."
     "Or maybe they just hate to see two girls together."
+    show bg cemetery with dissolve
     "We get to the cemetery quick enough, Val takes us over to her grave."
     v "Hey, {glitch=5.0}{color=#bababa}{b}████{/b}{/color}{/glitch}."
     e "God I hate that name so much."
@@ -1541,6 +1603,7 @@ label cemetery_scene_1_alt:
     v "Sorry *sniffle* about that."
     "And she wipes her tears off her face."
     v "Let's uh, go stand under the tree, okay?"
+    show bg tree with dissolve
     "We go and walk over to the lone tree among the graves, we sit down underneath it."
     v "Do you know why we came here?"
     e "So you could talk about your dead ex-girlfriend?"
@@ -1559,6 +1622,7 @@ label cemetery_scene_1_alt:
 
 label cemetery_scene_2:
     #Eve arrives at the cemetery with Val's body
+    play music "audio/sfx_night_ambience.mp3"
     e "We're here. It's chilly again."
     e "Figures. I'd pick a night where the weather decides to remind me of you."
     e "Feels like just yesterday you were here mourning… her."
@@ -1591,6 +1655,7 @@ label try_to_remember:
     #NOTE: This part got really long and nested but making it different labels wouldve been clunky so whatever
     scene bg cemetery with fuzzy_transition
     "I remembered it."
+    #play music "music_track_1.mp3"
     "She took me there, to the doctor."
     "Because..."
 
@@ -1615,6 +1680,7 @@ label try_to_remember:
                     "I look up at her."
                     show val normal 75 at right with fuzzy_transition
                     "But she's wrong."
+                    play music "audio/music_track_3.mp3" fadein 0.3
                     "She looks... wrong."
                     "She isn't focused in my vision anymore." 
                     show val normal 25 at right with fuzzy_transition
@@ -1639,6 +1705,7 @@ label try_to_remember:
                         "See her.":
                             "Finally, I see her."
                             scene bg dead val with fuzzy_transition
+                            #play music "audio/music_panic.mp3" fadein 0.3
                             "I didn't see her before..."
                             "...but I see her now."
                             "A wave of nausea hits me. I feel it well up in my throat."
@@ -1707,6 +1774,8 @@ label try_to_remember:
                                                             "Out of everything, I remember that perfectly."
                                                             menu:
                                                                 "Mourn.":
+                                                                    stop music fadeout 0.3 
+                                                                    #play music "audio/music_title.mp3" fadein 0.3 
                                                                     "I stand in front of the door to my apartment."
                                                                     "I can feel myself shaking, I'm still not sure if I have the strength to face her."
                                                                     "I made sure Kit didn't come with me. She doesn't need to see Val like this."
@@ -1849,6 +1918,7 @@ label try_to_remember:
 
 #The "sex" scene
 label sesbian_lex:
+    play music "audio/music_track_2.mp3"
     $ came_from_sesbian_lex = True
     # "Scene - Eve has 'sex' with Vallerie"
     #jump mem_hallucination_1
@@ -1902,6 +1972,7 @@ label sesbian_lex:
 
 
 label after_sex_high:
+    stop music fadeout 0.3
     scene black with fuzzy_transition
     scene bg room with fuzzy_transition
     "The voices fade away"
@@ -1974,40 +2045,58 @@ label after_sex_high:
 
 
 label suicide_ending:
-    "Scene - Suicide Ending"
-
+    #"Scene - Suicide Ending"
+    stop music fadeout 0.3
+    play music "audio/music_dramatic.mp3" fadein 0.3
+    scene bg dead val
+    "I can't do this."
+    "She can't be."
+    "She can't be."
+    "I can't live without her."
+    "I panic."
+    "I reach for the closest bottle of pills and down them all."
+    "It only takes a couple of seconds until I convulse and fall to the floor."
+    "I feel my mind getting hazier.."
+    "my body feels separate from me.."
+    "and in these last couple seconds I just think to myself... "
+    "you know, in most peoples final moments I'm sure they think about all the people that will miss them,"
+    "all the things they didn't get to do,"
+    "their regrets,"
+    "their finaly words,"
+    "but I don't have any of that."
+    "And all I can think about is how excited I am to see you again."
+    "Valerie."
+    stop music fadeout 0.3
     $ achievement.grant("suicide_ending")
     $ renpy.notify("Achievement Unlocked: I'll be with you soon")
-    jump credits
+    jump credits_suicide
     
 
 label bad_touch_ending:
-    # Choices here always result in bad touch
-    menu:
-        "Stoke.":
-            ""
-        "Touch her.":
-            ""
-        
-    #Continue having "sex"
-    menu:
-        "Stoke.":
-            ""
-        "Touch her.":
-            ""
+    stop music fadeout 0.3
+    #$ came_from_bad_touch True
+    "I can't restrain myself any longer."
+    "The sight of her naked body just keeps teasing me."
+    "I'm so goddamn pent up I just-"
+    "I need to touch her"
+    "to relieve myself"
+    "to let me finish"
+    "I sit up in a flash and reach towards Valerie."
+    "I go to put my hands on her wrists but she's gone"
+    "and I never saw her again after that."
+    "..."
+    "..."
+    "I'm so fucking selfish."
 
-    #Continue having "sex" (again)
-    menu:
-        "Touch her.":
-            "Evelyn tries to touch Valerie while they are having sex and her hallucination disappears"
 
     $ achievement.grant("bad_touch_ending")
     $ renpy.notify("Achievement Unlocked: Crossed the line")
-    jump credits
+    jump credits_bad_touch
 
     
 
 label infidelity_ending:
+    stop music fadeout 0.3
     e "It's fine."
     "I push her to the ground."
     e "Take off your clothes."
@@ -2028,11 +2117,13 @@ label infidelity_ending:
     
     $ achievement.grant("infidelity_ending")
     $ renpy.notify("Achievement Unlocked: Not love")
-    jump credits
+    jump credits_infidelity
 
 
 label delusion_ending_kit:
+    stop music fadeout 0.3
     #"Evelyn never learns of Valerie's death and impersonates her / mentally becomes 'her'"
+    play music "audio/music_dramatic.mp3"
     "I push her out of the way and run into my apartment."
     "She doesn't know anything."
     "I'm right."
@@ -2042,24 +2133,28 @@ label delusion_ending_kit:
     "Isn't that right?"
     menu:
         "Valerie.":
-            jump credits
+            $ achievement.grant("delusion_ending")
+            $ renpy.notify("Achievement Unlocked: As if nothing happened")
+            jump credits_delusion
     
     $ achievement.grant("delusion_ending")
     $ renpy.notify("Achievement Unlocked: As if nothing happened")
-    jump credits
 
 label delusion_ending_drugs:
+    stop music fadeout 0.3
+    play music "audio/music_dramatic.mp3"
     menu:
         "I am"
         "Valerie":
-            jump credits
+            $ achievement.grant("delusion_ending")
+            $ renpy.notify("Achievement Unlocked: As if nothing happened")
+            jump credits_delusion
 
-    $ achievement.grant("delusion_ending")
-    $ renpy.notify("Achievement Unlocked: As if nothing happened")
-    jump credits
+
 
 
 label good_ending:
+    stop music fadeout 0.3
     "But the therapy helps."
     "And Kit has become someone I can rely on."
     "So even if she's gone I hope Valerie watches over me as I try to heal."
@@ -2067,19 +2162,23 @@ label good_ending:
 
     $ achievement.grant("good_ending")
     $ renpy.notify("Achievement Unlocked: Heal.")
-    jump credits
+    jump credits_good_ending
 
 label true_ending:
+    stop music fadeout 0.3
     $ came_from_true_ending = True
     #"Scene - True ending."
     #"Eve confides in Kit that Valerie is dead"
+    scene black
     "After that I just, kept living my life."
     "So much time passed, so much time without"
     "her."
     "Valerie."
     "But today's been three years since she died."
+    scene bg val buried timeskip with dissolve 
     "And here I am, back at the cemetery."
     "I sit on the floor next to her."
+    play music "audio/sfx_day_ambience.mp3"
     e "Hey baby, I missed you."
     e "Sorry I haven't visited in awhile. I just, got kinda busy."
     e "I met this girl..."
@@ -2104,54 +2203,411 @@ label true_ending:
     e "Every day."
     "It hasn't really gotten easier but I have people to support me through it."
     e "I love you, Valerie."
+    stop music fadeout 0.3
 
     $ achievement.grant("true_ending")
     $ renpy.notify("Achievement Unlocked: Valerie.")
-    jump credits
+    jump credits_true_ending
 
 transform credits_scroll:
-    ypos 1.2                   
-    linear 15.0 ypos 0.30       
+    ypos 1080                  
+    linear 120.0 ypos -5000       
 
     #return
 
-screen credits():
+#credits screens
+screen credits_delusion():
 
-    add Solid("#000")
+    add "images/bg room.png" 
 
     vbox:
-        
         at credits_scroll
         xalign 0.5
         spacing 30
 
-        text "Withdrawal Symptoms" size 60 xalign 0.5
-
-        null height 1000
-
-        text "Writing\nAubrey \"Aubsickle\" Morra" xalign 0.5
-        text "3D Environments & Character Art\nSkye \"Ghost Fetus\" Peterson" xalign 0.5
-        text "Programming\nSerena \"Renabetha\" D'Avanzo" xalign 0.5
-        text "Music\nJoe \"joe_con7\" Connors" xalign 0.5
-        text "Logo & GUI Design\nAubsickle" xalign 0.5
-        text "Voice Acting\nEvelyn - Aubsickle\nValerie - Renabetha\nKit - Beatrice \"Rubea\" "xalign 0.5
-
+        #add Transform("images/logo.png", zoom=0.7, xalign=0.5)
+        add "images/title_screen_logo.png" xalign 0.5
+        text "A Game By Studio GKG" size 40 xalign 0.5
 
         null height 50
 
+        #text "Writing\nAubrey \"Aubsickle\" Morra" xalign 0.5
+        text "Writing" size 40 xalign 0.5
+        text "Aubrey \"Aubsickle\" Morra" size 32 xalign 0.5
+        text "\n"
+        text "Programming" size 40 xalign 0.5
+        text "Serena \"Renabetha\" D'Avanzo" size 32 xalign 0.5
+        text "\n"
+        text "3D Environments & Character Art" size 40 xalign 0.5
+        text "Skye \"Ghost Fetus\" Peterson" size 32 xalign 0.5
+        text "\n"
+        text "Music" size 40 xalign 0.5
+        text "Joe \"joe_con7\" Connors" size 32 xalign 0.5
+        #text "3D Environments & Character Art\nSkye \"Ghost Fetus\" Peterson" xalign 0.5
+        #text "Programming\nSerena \"Renabetha\" D'Avanzo" xalign 0.5
+        #text "Music\nJoe \"joe_con7\" Connors" xalign 0.5
+        text "\n"
+        text "Logo & GUI Design" size 40 xalign 0.5
+        text "Aubsickle" size 32 xalign 0.5
+        text "\n"
+        text "Voice Acting" size 40 xalign 0.5
+        text "Evelyn - Aubsickle" size 32 xalign 0.5
+        text "Valerie - Renabetha" size 32 xalign 0.5
+        text "Kit - Beatrice \"Rubea\""size 32 xalign 0.5
+        text "\n"
+        text "Additional Help From" size 40 xalign 0.5
+        text "Coding With Be and E" size 32 xalign 0.5
+        text "Kia Azad" size 32 xalign 0.5
+        text "Wattson" size 32 xalign 0.5
+        text "\n"
+        text "SFX from Pixabay.com" size 40 xalign 0.5
+        text "\n"
+        text "Speical Thanks" size 40 xalign 0.5
+        text "You!!!" size 32 xalign 0.5
+
+        null height 200
+
         text "Thank you for playing!" size 60 xalign 0.5
 
-label credits:
+        null height 1000
 
-    show screen credits
-    if came_from_true_ending:
-        $ came_from_true_ending = True 
-        scene bg cemetery
+screen credits_true_ending():
 
-    scene bg pills with fade
+    add "images/bg cemetery.png" 
 
-    $ renpy.pause(1000.0, hard=True)
+    vbox:
+        at credits_scroll
+        xalign 0.5
+        spacing 30
 
-    hide screen credits with fade
+        #add Transform("images/logo.png", zoom=0.7, xalign=0.5)
+        add "images/title_screen_logo.png" xalign 0.5
+        text "A Game By Studio GKG" size 40 xalign 0.5
+
+        null height 50
+
+        #text "Writing\nAubrey \"Aubsickle\" Morra" xalign 0.5
+        text "Writing" size 40 xalign 0.5
+        text "Aubrey \"Aubsickle\" Morra" size 32 xalign 0.5
+        text "\n"
+        text "Programming" size 40 xalign 0.5
+        text "Serena \"Renabetha\" D'Avanzo" size 32 xalign 0.5
+        text "\n"
+        text "3D Environments & Character Art" size 40 xalign 0.5
+        text "Skye \"Ghost Fetus\" Peterson" size 32 xalign 0.5
+        text "\n"
+        text "Music" size 40 xalign 0.5
+        text "Joe \"joe_con7\" Connors" size 32 xalign 0.5
+        #text "3D Environments & Character Art\nSkye \"Ghost Fetus\" Peterson" xalign 0.5
+        #text "Programming\nSerena \"Renabetha\" D'Avanzo" xalign 0.5
+        #text "Music\nJoe \"joe_con7\" Connors" xalign 0.5
+        text "\n"
+        text "Logo & GUI Design" size 40 xalign 0.5
+        text "Aubsickle" size 32 xalign 0.5
+        text "\n"
+        text "Voice Acting" size 40 xalign 0.5
+        text "Evelyn - Aubsickle" size 32 xalign 0.5
+        text "Valerie - Renabetha" size 32 xalign 0.5
+        text "Kit - Beatrice \"Rubea\""size 32 xalign 0.5
+        text "\n"
+        text "Additional Help From" size 40 xalign 0.5
+        text "Coding With Be and E" size 32 xalign 0.5
+        text "Kia Azad" size 32 xalign 0.5
+        text "Wattson" size 32 xalign 0.5
+        text "\n"
+        text "SFX from Pixabay.com" size 40 xalign 0.5
+        text "\n"
+        text "Speical Thanks" size 40 xalign 0.5
+        text "You!!!" size 32 xalign 0.5
+
+        null height 200
+
+        text "Thank you for playing!" size 60 xalign 0.5
+
+        null height 1000
+
+screen credits_good_ending():
+
+    add "images/bg hallway.png" 
+
+    vbox:
+        at credits_scroll
+        xalign 0.5
+        spacing 30
+
+        #add Transform("images/logo.png", zoom=0.7, xalign=0.5)
+        add "images/title_screen_logo.png" xalign 0.5
+        text "A Game By Studio GKG" size 40 xalign 0.5
+
+        null height 50
+
+        #text "Writing\nAubrey \"Aubsickle\" Morra" xalign 0.5
+        text "Writing" size 40 xalign 0.5
+        text "Aubrey \"Aubsickle\" Morra" size 32 xalign 0.5
+        text "\n"
+        text "Programming" size 40 xalign 0.5
+        text "Serena \"Renabetha\" D'Avanzo" size 32 xalign 0.5
+        text "\n"
+        text "3D Environments & Character Art" size 40 xalign 0.5
+        text "Skye \"Ghost Fetus\" Peterson" size 32 xalign 0.5
+        text "\n"
+        text "Music" size 40 xalign 0.5
+        text "Joe \"joe_con7\" Connors" size 32 xalign 0.5
+        text "\n"
+        text "Logo & GUI Design" size 40 xalign 0.5
+        text "Aubsickle" size 32 xalign 0.5
+        text "\n"
+        text "Voice Acting" size 40 xalign 0.5
+        text "Evelyn - Aubsickle" size 32 xalign 0.5
+        text "Valerie - Renabetha" size 32 xalign 0.5
+        text "Kit - Beatrice \"Rubea\""size 32 xalign 0.5
+        text "\n"
+        text "Additional Help From" size 40 xalign 0.5
+        text "Coding With Be and E" size 32 xalign 0.5
+        text "Kia Azad" size 32 xalign 0.5
+        text "Wattson" size 32 xalign 0.5
+        text "\n"
+        text "SFX from Pixabay.com" size 40 xalign 0.5
+        text "\n"
+        text "Speical Thanks" size 40 xalign 0.5
+        text "You!!!" size 32 xalign 0.5
+
+        null height 200
+
+        text "Thank you for playing!" size 60 xalign 0.5
+
+        null height 1000
+
+screen credits_suicide():
+
+    add "images/bg room.png" 
+
+    vbox:
+        at credits_scroll
+        xalign 0.5
+        spacing 30
+
+        #add Transform("images/logo.png", zoom=0.7, xalign=0.5)
+        add "images/title_screen_logo.png" xalign 0.5
+        text "A Game By Studio GKG" size 40 xalign 0.5
+
+        null height 50
+
+        #text "Writing\nAubrey \"Aubsickle\" Morra" xalign 0.5
+        text "Writing" size 40 xalign 0.5
+        text "Aubrey \"Aubsickle\" Morra" size 32 xalign 0.5
+        text "\n"
+        text "Programming" size 40 xalign 0.5
+        text "Serena \"Renabetha\" D'Avanzo" size 32 xalign 0.5
+        text "\n"
+        text "3D Environments & Character Art" size 40 xalign 0.5
+        text "Skye \"Ghost Fetus\" Peterson" size 32 xalign 0.5
+        text "\n"
+        text "Music" size 40 xalign 0.5
+        text "Joe \"joe_con7\" Connors" size 32 xalign 0.5
+        text "\n"
+        text "Logo & GUI Design" size 40 xalign 0.5
+        text "Aubsickle" size 32 xalign 0.5
+        text "\n"
+        text "Voice Acting" size 40 xalign 0.5
+        text "Evelyn - Aubsickle" size 32 xalign 0.5
+        text "Valerie - Renabetha" size 32 xalign 0.5
+        text "Kit - Beatrice \"Rubea\""size 32 xalign 0.5
+        text "\n"
+        text "Additional Help From" size 40 xalign 0.5
+        text "Coding With Be and E" size 32 xalign 0.5
+        text "Kia Azad" size 32 xalign 0.5
+        text "Wattson" size 32 xalign 0.5
+        text "\n"
+        text "SFX from Pixabay.com" size 40 xalign 0.5
+        text "\n"
+        text "Speical Thanks" size 40 xalign 0.5
+        text "You!!!" size 32 xalign 0.5
+
+        null height 200
+
+        text "Thank you for playing!" size 60 xalign 0.5
+
+        null height 1000
+
+
+screen credits_infidelity():
+
+
+    add "images/bg drugs.png" 
+
+    vbox:
+        at credits_scroll
+        xalign 0.5
+        spacing 30
+
+        #add Transform("images/logo.png", zoom=0.7, xalign=0.5)
+        add "images/title_screen_logo.png" xalign 0.5
+        text "A Game By Studio GKG" size 40 xalign 0.5
+
+        null height 50
+
+        #text "Writing\nAubrey \"Aubsickle\" Morra" xalign 0.5
+        text "Writing" size 40 xalign 0.5
+        text "Aubrey \"Aubsickle\" Morra" size 32 xalign 0.5
+        text "\n"
+        text "Programming" size 40 xalign 0.5
+        text "Serena \"Renabetha\" D'Avanzo" size 32 xalign 0.5
+        text "\n"
+        text "3D Environments & Character Art" size 40 xalign 0.5
+        text "Skye \"Ghost Fetus\" Peterson" size 32 xalign 0.5
+        text "\n"
+        text "Music" size 40 xalign 0.5
+        text "Joe \"joe_con7\" Connors" size 32 xalign 0.5
+        text "\n"
+        text "Logo & GUI Design" size 40 xalign 0.5
+        text "Aubsickle" size 32 xalign 0.5
+        text "\n"
+        text "Voice Acting" size 40 xalign 0.5
+        text "Evelyn - Aubsickle" size 32 xalign 0.5
+        text "Valerie - Renabetha" size 32 xalign 0.5
+        text "Kit - Beatrice \"Rubea\""size 32 xalign 0.5
+        text "\n"
+        text "Additional Help From" size 40 xalign 0.5
+        text "Coding With Be and E" size 32 xalign 0.5
+        text "Kia Azad" size 32 xalign 0.5
+        text "Wattson" size 32 xalign 0.5
+        text "\n"
+        text "SFX from Pixabay.com" size 40 xalign 0.5
+        text "\n"
+        text "Speical Thanks" size 40 xalign 0.5
+        text "You!!!" size 32 xalign 0.5
+
+        null height 200
+
+        text "Thank you for playing!" size 60 xalign 0.5
+
+        null height 1000
+
+screen credits_bad_touch():
+
+    add "images/bg bed.png" 
+
+    vbox:
+        at credits_scroll
+        xalign 0.5
+        spacing 30
+
+        #add Transform("images/logo.png", zoom=0.7, xalign=0.5)
+        add "images/title_screen_logo.png" xalign 0.5
+        text "A Game By Studio GKG" size 40 xalign 0.5
+
+        null height 50
+
+        #text "Writing\nAubrey \"Aubsickle\" Morra" xalign 0.5
+        text "Writing" size 40 xalign 0.5
+        text "Aubrey \"Aubsickle\" Morra" size 32 xalign 0.5
+        text "\n"
+        text "Programming" size 40 xalign 0.5
+        text "Serena \"Renabetha\" D'Avanzo" size 32 xalign 0.5
+        text "\n"
+        text "3D Environments & Character Art" size 40 xalign 0.5
+        text "Skye \"Ghost Fetus\" Peterson" size 32 xalign 0.5
+        text "\n"
+        text "Music" size 40 xalign 0.5
+        text "Joe \"joe_con7\" Connors" size 32 xalign 0.5
+        text "\n"
+        text "Logo & GUI Design" size 40 xalign 0.5
+        text "Aubsickle" size 32 xalign 0.5
+        text "\n"
+        text "Voice Acting" size 40 xalign 0.5
+        text "Evelyn - Aubsickle" size 32 xalign 0.5
+        text "Valerie - Renabetha" size 32 xalign 0.5
+        text "Kit - Beatrice \"Rubea\""size 32 xalign 0.5
+        text "\n"
+        text "Additional Help From" size 40 xalign 0.5
+        text "Coding With Be and E" size 32 xalign 0.5
+        text "Kia Azad" size 32 xalign 0.5
+        text "Wattson" size 32 xalign 0.5
+        text "\n"
+        text "SFX from Pixabay.com" size 40 xalign 0.5
+        text "\n"
+        text "Speical Thanks" size 40 xalign 0.5
+        text "You!!!" size 32 xalign 0.5
+
+        null height 200
+
+        text "Thank you for playing!" size 60 xalign 0.5
+
+        null height 1000
+#credits labels
+label credits_delusion:
+
+    show screen credits_delusion
+    play sound "audio/voicemail_delusion.mp3" 
+ 
+    #scroll time 60ish seconds
+    #scene bg pills with fade
+
+    $ renpy.pause(70.0, hard=True)
+
+    #hide screen credits with fade
 
     return
+
+label credits_true_ending:
+
+    show screen credits_true_ending
+    play sound "audio/voicemail_true_ending.mp3" 
+ 
+
+    $ renpy.pause(70.0, hard=True)
+
+    #hide screen credits with fade
+
+    return
+
+label credits_good_ending:
+
+    show screen credits_good_ending
+    play sound "audio/voicemail_good_ending.mp3" 
+ 
+
+    $ renpy.pause(70.0, hard=True)
+
+    #hide screen credits with fade
+
+    return 
+
+
+label credits_suicide:
+
+    show screen credits_suicide
+    play sound "audio/voicemail_suicide.mp3" 
+ 
+
+    $ renpy.pause(70.0, hard=True)
+
+    #hide screen credits with fade
+
+    return 
+
+label credits_infidelity:
+
+    show screen credits_infidelity
+    play sound "audio/voicemail_infidelity.mp3" 
+ 
+
+    $ renpy.pause(70.0, hard=True)
+
+    #hide screen credits with fade
+
+    return 
+
+label credits_bad_touch:
+
+    show screen credits_bad_touch
+    play sound "audio/voicemail_bad_touch.mp3" 
+ 
+
+    $ renpy.pause(70.0, hard=True)
+
+    #hide screen credits with fade
+
+    return 
+
