@@ -354,7 +354,7 @@ label answer_door:
     "I rip it out, it's painful. Hope I don't catch something."
     "Blood drips down my hand onto the bedsheet. Luckily it's so gross already, you can barely notice it."
     "Can't believe I forgot to throw out the needles from last night.” 
-    “That's what I get for leaving shit around."
+    "That's what I get for leaving shit around."
     show val normal at right
     v "hmmnmmm?"
     "Shit, I woke her up."
@@ -414,7 +414,22 @@ label answer_door:
     menu:
         v "Guess suicide's off the menu, you have any better plans for the day?"
         "Sit around and do nothing":
-            #TODO: Need to add scene
+            #TODO: music or smth?
+            show eve normal at left 
+            show val normal at right
+            e "yeah, we lay around and do fuck all”
+            v "we do that too often c’mon let’s actually spend time together.”
+            v "watch some TV or something”
+            e "your taste in shows suck”
+            e "and besides, we are spending time together.”
+            e "in bed,”
+            e "doing nothing.”
+            "val is making a face at me, i can tell she’s annoyed.”
+            v "baby, seriously, let’s do something.”
+            e "okay okay fine,”
+            "her face is beaming”
+            v "what are we gonna do?”
+
             "nothing"
             #$ came_from_music = False
 
@@ -1155,8 +1170,294 @@ label aftermath:
         "Heal.":
             jump good_ending
 
-label take_drugs_alone: #TODO: scene not finished
-    "follows they're all for me choice"
+label take_drugs_alone: #MUSIC
+
+    $ came_from_alone = True
+
+    show eve annoyed at left
+    show kit normal at right 
+
+    e "so i’m gonna go… do those now”
+
+    hide kit normal
+
+    "i slam the door in her face”
+
+    e "hey baby i’m gonna get high you wanna join me?”
+
+    k "BYE EEEVEEE, I’M GONNA BRING BY SOME FRUIT LATER!!! SEE YOU THEN!!! ♡⋆ ˚｡⋆୨୧˚”
+
+    "god damn it.”
+
+    k "ALSO MY MOM SAYS YOU CAN HAVE ANOTHER MONTHS EXTENSION ON YOUR RENT!!! ⋆ ˚｡⋆୨୧˚”
+
+    e "i’ll get the stuff out of the drawer”
+
+    show val normal at right
+
+    v "i’ll be in bed when you’re ready”
+
+    "i rummage through the drawers and pull out two acid tabs”
+
+    "i put one on my tongue, give the other to val and lay on the bed next to her”
+
+    v "thank you sweetie”
+
+    "i look up at the ceiling and relax, i feel the walls start to get a little weird”
+
+    "i start to hear some familiar voices as i blink my eyes open and shut”
+
+    jump mem_hallucination_1
+
+
+label come_down_from_high: #MUSIC
+
+    $ come_from_come_down = True
+
+    show eve high at left
+
+    show val normal at right
+
+    e "i kinda, don’t wanna be sober”
+
+    e "you wanna stay high a little longer?”
+
+    v "yeah okay, you get the stuff tho im still a lil out of it”
+
+    e "yes ma’am”
+
+    "i crawl out of our bed and walk over to the light switch”
+
+    "i flick it on”
+
+    hide val normal
+    show val annoyed at right
+
+    v "Aughhhh,,, too bright,,,, shut it offfff”
+
+    e "sorry, sorry”
+
+    hide val annoyed
+
+    "guess i gotta rummage through our shit in the dark.”
+
+    "i wander over to the one table in our room and grab a random pill bottle.”
+
+    "good enough”
+
+    "i flop back into our bed and open the bottle, taking 2 pills myself and leaving the rest up to val”
+
+    show val happy at right
+
+    v "thank you baby”
+
+    e "shhhh, just take your pillssss”
+
+    hide eve high
+    hide val happy
+
+    "i lay there on the bed looking up at the ceiling.”
+
+    "i feel vals weight next to me as i start to feel the high.”
+
+    "i close my eyes and feel it wash over me, but just as i do i hear the same familiar voices.”
+
+    "i open my eyes but my vision is blurry now.”
+
+    jump mem_hallucination_2
+
+
+label drugs_alt: 
+
+    "i start to come back down, i don’t think that helped.”
+
+    "i feel even more emotional than before.”
+
+    "i look over at valerie”
+
+    "i’m still pissed about that night”
+
+"Confront her on the argument":
+            "Why do you always do that?"
+            v "Do what?"
+            e "You always bring her up whenever we fight."
+            e "Like she's your guardian angel, I just-"
+            e "it makes me feel so fucking pathetic."
+            e "I hate it."
+            v "Baby, this seems like it's a lot for you, I think we should just talk this out."
+            menu:
+                v "Let me take you somewhere"
+                "Hear her out":
+                    jump cemetery_scene_1_alt
+                "Fuck her til she knows I was right":
+                    ""
+                "Get so high you leave this world":
+                    e "No."
+                    v "Baby-"
+                    "I ignore her."
+                    "Fuck this."
+                    "I don't need to take this shit from her."
+                    "I'm too sober to deal with this"
+                    "I rummage around the apartment and eat a half finished edible, a mushroom and some random pill before laying down on the floor."
+                    menu:
+                        "Valerie is wrong.":
+                            "She's wrong."
+                            menu:
+                                "I know Valerie is wrong.":
+                                    "She's always wrong."
+                                    menu:
+                                        "I know more than Valerie.":
+                                            "I'm always right."
+                                            menu:
+                                                "I know what Valerie really wants.":
+                                                    "Evelyn is always right."
+                                                    menu:
+                                                        "I know Valerie":
+                                                            jump delusion_ending_drugs
+"fuck her to get your anger out":
+    jump i_want_to_touch_her
+"storm out of the apartment":
+    e "i’m going to go insane”
+
+    "i stand up and blindly rush out of the apartment”
+
+    "i’m so pent up i need to get release”
+
+    "valerie you stupid bitch why wont you let me touch you”
+
+    "i love you. valerie i love you.”
+
+    "i hear footsteps”
+
+    k "EVE!! HI!!! what are you doing out here??”
+
+    "she’ll do… but i shouldn’t”
+
+    "what would valerie think.”
+
+    menu:
+        "fuck kit":
+            "fuck it i don’t care”
+
+            e "heyyyy kit”
+
+            e "y’know i’ve always thought you were kind of pretty”
+
+            "i enter her space”
+
+            k "w-WOAH eve,, y-you have a girlfriend”
+
+            e "it’s fine, she’s into me fucking other girls”
+
+            "she blushes at that comment”
+
+            "god, it doesn’t take anything to get her going does it.”
+
+            "i push further against her, trapping her between me and the wall”
+
+            "i go in to kiss her.”
+
+            "i see her try to restrain herself, but her desire gives in”
+
+            "as i kiss her i put her hand on my chest”
+
+            e "doesn’t that feel good”
+
+            e "let’s go inside your apartment”
+
+            "she does it without even thinking”
+
+            e "hey, let’s go to your bed, okay?”
+
+            k "eeevee,, mnmmnmnn”
+
+            e "c’monn~”
+
+            "i kiss her deep again”
+
+            "i grab her hand, she doesn’t fight back”
+
+            "i put her hand under my top and on my chest”
+
+            e "do you like my little tits”
+
+            "she’s nodding her head and whimpering”
+
+            "it’s so cute”
+
+            k "eve.. a-are you sure”
+
+            e "hmm?”
+
+            k "are you sure valerie is okay with us…”
+
+            menu:
+                "lie":
+                    jump infidelity_ending
+
+
+
+
+
+
+
+
+label i_want_to_touch_her:
+
+    show eve horny at left
+
+    show val smug at right
+
+    "god, she’s so fucking hot, the way she flaunts her body in front of me”
+
+    "the way she degrades me and tells me what i can and can’t do”
+
+    "it’s so hot, it just makes me want to grab her and take her”
+
+    v "keep stroking for me.”
+
+    e "but, baby can i please-”
+
+    v "no touching.”
+
+    v "just keep stroking that tiny pathetic little dick of yours now.”
+
+    menu:
+        "stroke"
+            "i keep stroking, but i can’t stop thinking about it”
+
+            "the thought of her soft skin, my hands running along her curves”
+
+            "it’s driving me up the wall”
+
+            e "just once”
+
+            v "no. did i tell you to do anything but stroke you pathetic freak.”
+
+            v "you don’t deserve to touch me.”
+
+            v "not after the way you act”
+
+            v "not after what you’ve done”
+
+            menu: 
+                "stroke":
+                    "i stroke my dick faster, so fast”
+
+                    v "you’re such a worthless piece of shit”
+
+                    "i can’t restrain myself”
+
+                    v "you disgust me”
+
+                "touch her":
+                    jump delusion_ending
+
+        "touch her":
+            jump delusion_ending
+
+
+
 
 label mem_hallucination_1:
     #"Scene - memory hallucination 1"
@@ -1191,6 +1492,10 @@ label mem_hallucination_1:
     if came_from_drugs:
         $ came_from_drugs = True 
         jump kit_at_door
+
+    if came_from_alone:
+        $ came_from_alone = True 
+        jump come_down_from_high
 
     if came_from_sesbian_lex:
         $ came_from_sesbian_lex = True
@@ -1249,9 +1554,17 @@ label mem_hallucination_2:
         $ came_from_offer_kit_drugs = True 
         jump answer_phone
 
+    if came_from_come_down:
+        $ came_from_come_down = True
+        jump drugs_alt
+
     if came_from_get_even_higher:
         $ came_from_get_even_higher = True 
         jump get_even_higher_cont
+
+    if came_from_sex_2:
+        $ came_from_sex_2 = True 
+        jump sesbian_lex_2_2
     
     return
 
@@ -2029,19 +2342,195 @@ label after_sex_high:
                                                                 "I know Valerie":
                                                                     jump delusion_ending_drugs
 
-
-
-                
-
-                    
         #TODO: not finished
         "Fuck Again":
             ""
         "Get some air":
             ""
 
-        
+    label sesbian_lex_2
 
+        $ come_from_sex_2 = True
+
+        e "i want to fuck. more.”
+
+        "i’m still pent up i need to get release”
+
+        v "yeah okay, let’s get you a little more fucked up first”
+
+        e "okay.”
+
+        n "i take half of some stale mushroom edible i found along with a pill i found next to it”
+
+        n "i start to feel it kick in, the walls feel funky, i watch valerie climb onto the bed.”
+
+        n "my vision starts to get blurry and i hear familiar voices in my ears.”
+
+        jump mem_hallucination_2
+
+
+    label sesbian_lex_2_2 
+        n "I start to come back down, i’m still pissed about the argument”
+
+        n "But val is in front of me, and she’s stripping”
+
+        v "babyy,,, c’mon pull out your tiny little dick okay”
+
+        v "i know you know the rules but remember no touching”
+
+        n "fuck, i’m so turned on right now”
+
+        n "i reach my hand into my pants and start slowly jerking off, looking at her”
+
+        v "that’s my pathetic little thing”
+
+        v "keep touching yourself”
+
+        n "i want to touch her”
+
+        e "c-can i- touch you?”
+
+        v "no.”
+
+        v "that’s against the rules.”
+
+        v "you don’t deserve to touch me.”
+
+    menu: 
+        "i can't deal with this right now":
+            e "i’m going to go insane”
+
+            "i stand up and blindly rush out of the apartment”
+
+            "i’m so pent up i need to get release”
+
+            "valerie you stupid bitch why wont you let me touch you”
+
+            "i love you. valerie i love you.”
+
+            "i hear footsteps”
+
+            k "EVE!! HI!!! what are you doing out here??”
+
+            "she’ll do… but i shouldn’t”
+
+            "what would valerie think.”
+
+            menu "fuck kit":
+                jump fuck_kit
+                
+                "try to talk to her":
+                    e "i needed some air”
+
+                    k "OH! Okay!! Do you wanna come back to my apartment to relax??”
+
+                    e "no.”
+
+                    "she pouts”
+
+                    k "AWWWWW, no fun,,”
+
+                    k "hey evee, you seem more upset than usual are you okay?
+
+                    menu:
+                        "fuck kit":
+                            jump fuck_kit
+                        "confide in her"
+                            e "i’m FINE, valerie is just pissing me off”
+
+                            e "she won’t let me touch her and it’s getting me all fucked up”
+
+                            e "and i keep remembering all these stupid fucking moments in our life”
+
+                            k "maybee you should hear her out…”
+
+                            e "here her out so what. she can compare me to her stupid ex girlfriend, and spit in my face.”
+
+                            e "disrespect how i live my life”
+
+                            k "eve,, i think maybe she’s just worried?”
+
+                            menu:
+                                "fuck kit"
+                                    jump fuck_kit
+                                "i know valerie better than her"
+                                    e "fuck off, you both just wanna turn me into her stupid perfect ex”
+
+                                    e "you’re even worse than her, you think you know her.”
+
+                                    k "Eve I-”
+
+                                    e "THAT’S NOT MY FUCKING NAME.”
+
+                                    menu:
+                                        "i know valerie":
+                                            jump delusion_ending_kit
+
+
+
+
+        "i don't want to stop i want to touch her":
+            jump i_want_to_touch_her
+            
+
+label fuck_kit:
+    Narration "fuck it i don’t care”
+
+    e "heyyyy kit”
+
+    e "y’know i’ve always thought you were kind of pretty”
+
+    "i enter her space”
+
+    k "w-WOAH eve,, y-you have a girlfriend”
+
+    e "it’s fine, she’s into me fucking other girls”
+
+    "she blushes at that comment”
+
+    "god, it doesn’t take anything to get her going does it.”
+
+    "i push further against her, trapping her between me and the wall”
+
+    "i go in to kiss her.”
+
+    "i see her try to restrain herself, but her desire gives in”
+
+    "as i kiss her i put her hand on my chest”
+
+    e "doesn’t that feel good”
+
+    e "let’s go inside your apartment”
+
+     "she does it without even thinking”
+
+    e "hey, let’s go to your bed, okay?”
+
+    k "eeevee,, mnmmnmnn”
+
+    e "c’monn~”
+
+    "i kiss her deep again”
+
+    "i grab her hand, she doesn’t fight back”
+
+    "i put her hand under my top and on my chest”
+
+    e "do you like my little tits”
+
+    "she’s nodding her head and whimpering”
+
+    "it’s so cute”
+
+    k "eve.. a-are you sure”
+
+    e "hmm?”
+
+    k "are you sure valerie is okay with us…”
+
+    menu:
+        "lie":
+            jump infidelity_ending
 
 
 label suicide_ending:
